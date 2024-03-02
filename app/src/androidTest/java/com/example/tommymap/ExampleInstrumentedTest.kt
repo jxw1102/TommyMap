@@ -35,7 +35,7 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         val searchDataSource = OnlineSearch.create(appContext, BuildConfig.TOMTOM_API_KEY)
         val repo = SearchRepositoryImpl(searchDataSource)
-        val paris = GeoPoint(48.36, 2.35)
+        val paris = GeoPoint(48.8573, 2.3522)
         runTest {
             repo.search("Louvre", paris).collect {
                 it.forEach { location ->

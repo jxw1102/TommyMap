@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
+import com.example.tommymap.data.SearchRepositoryImpl
+import com.example.tommymap.ui.SearchViewModel
 import com.example.tommymap.ui.TommySearchView
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.LocationProvider
@@ -16,6 +18,8 @@ import com.tomtom.sdk.location.android.AndroidLocationProvider
 import com.tomtom.sdk.location.android.AndroidLocationProviderConfig
 import com.tomtom.sdk.map.display.MapOptions
 import com.tomtom.sdk.map.display.ui.MapFragment
+import com.tomtom.sdk.search.Search
+import com.tomtom.sdk.search.online.OnlineSearch
 import kotlin.time.Duration.Companion.milliseconds
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private val locationProvider: LocationProvider by lazy {
         val config = AndroidLocationProviderConfig(250.milliseconds, Distance.meters(20.0))
         AndroidLocationProvider(this, config)
+    }
+    private val onlineSearch: Search by lazy {
+        OnlineSearch.create(this, BuildConfig.TOMTOM_API_KEY)
     }
     // ----
 
@@ -71,8 +78,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSearchView(): View {
         searchView = ComposeView(this).apply {
+            val factory = SearchViewModel.Factory(locationProvider, SearchRepositoryImpl(onlineSearch))
             setContent {
-                TommySearchView()
+                TommySearchView(factory)
             }
         }
         searchView.layoutParams = FrameLayout.LayoutParams(
