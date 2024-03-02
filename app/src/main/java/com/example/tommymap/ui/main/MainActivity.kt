@@ -1,4 +1,4 @@
-package com.example.tommymap
+package com.example.tommymap.ui.main
 
 import android.Manifest
 import android.os.Bundle
@@ -7,28 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.tommymap.BuildConfig
+import com.example.tommymap.R
 import com.example.tommymap.data.NavigationRepository
 import com.example.tommymap.data.NavigationRepositoryImpl
 import com.example.tommymap.data.SearchRepositoryImpl
-import com.example.tommymap.ui.SearchViewModel
-import com.example.tommymap.ui.TommySearchView
-import com.tomtom.quantity.Distance
+import com.example.tommymap.data.TommyLocationProvider
+import com.example.tommymap.dp2px
+import com.example.tommymap.isLocationPermissionGranted
+import com.example.tommymap.ui.search.SearchViewModel
+import com.example.tommymap.ui.search.TommySearchView
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStore
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStoreConfiguration
-import com.tomtom.sdk.location.LocationProvider
-import com.tomtom.sdk.location.android.AndroidLocationProvider
-import com.tomtom.sdk.location.android.AndroidLocationProviderConfig
 import com.tomtom.sdk.map.display.MapOptions
 import com.tomtom.sdk.map.display.ui.MapFragment
 import com.tomtom.sdk.map.display.ui.currentlocation.CurrentLocationButton
-import com.tomtom.sdk.navigation.TomTomNavigation
 import com.tomtom.sdk.navigation.UnitSystemType
 import com.tomtom.sdk.navigation.online.Configuration
 import com.tomtom.sdk.navigation.online.OnlineTomTomNavigationFactory
@@ -41,14 +45,12 @@ import com.tomtom.sdk.search.online.OnlineSearch
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import java.util.Locale
-import kotlin.time.Duration.Companion.milliseconds
 
 class MainActivity : AppCompatActivity() {
 
     // dependencies
-    private val locationProvider: LocationProvider by lazy {
-        val config = AndroidLocationProviderConfig(250.milliseconds, Distance.meters(20.0))
-        AndroidLocationProvider(this, config)
+    private val locationProvider: TommyLocationProvider by lazy {
+        TommyLocationProvider(this)
     }
     private val onlineSearch: Search by lazy {
         OnlineSearch.create(this, BuildConfig.TOMTOM_API_KEY)
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     private val tileStore: NavigationTileStore by lazy {
         NavigationTileStore.create(this, NavigationTileStoreConfiguration(BuildConfig.TOMTOM_API_KEY))
     }
-    private val tomTomNavigation: TomTomNavigation by lazy {
+    private val tomTomNavigationProvider = lazy {
         OnlineTomTomNavigationFactory.create(Configuration(this, tileStore, locationProvider, routePlanner))
     }
     private val navigationRepository: NavigationRepository by lazy {
@@ -101,7 +103,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val factory = MainViewModel.Factory(locationProvider, navigationRepository)
+        val factory =
+            MainViewModel.Factory(locationProvider, tomTomNavigationProvider, navigationRepository)
         mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         val frameLayout = FrameLayout(this)
@@ -111,10 +114,20 @@ class MainActivity : AppCompatActivity() {
         frameLayout.addView(setupMapContainer())
         frameLayout.addView(setupSearchView())
         frameLayout.addView(setupSimulationButton())
-        setupNavigationUi()
 
         requestLocationPermission()
         configureViewModel()
+    }
+
+    override fun onDestroy() {
+        locationProvider.close()
+        onlineSearch.close()
+        routePlanner.close()
+        tileStore.close()
+        if (tomTomNavigationProvider.isInitialized()) {
+            tomTomNavigationProvider.value.close()
+        }
+        super.onDestroy()
     }
 
     private fun setupMapContainer(): FragmentContainerView {
@@ -136,7 +149,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSearchView(): View {
         searchView = ComposeView(this).apply {
-            val factory = SearchViewModel.Factory(locationProvider, SearchRepositoryImpl(onlineSearch), navigationRepository)
+            val factory = SearchViewModel.Factory(
+                locationProvider,
+                SearchRepositoryImpl(onlineSearch),
+                navigationRepository
+            )
             setContent {
                 TommySearchView(factory)
             }
@@ -160,9 +177,13 @@ class MainActivity : AppCompatActivity() {
         }
         simulationButton.text = "Start Simulation"
         simulationButton.setOnClickListener {
+            if (!isLocationPermissionGranted) {
+                Toast.makeText(this@MainActivity, "Please allow location permissions", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             simulationButton.visibility = ViewGroup.GONE
             searchView.visibility = ViewGroup.GONE
-            mainViewModel.startNavigation(tomTomNavigation)
+            mainViewModel.startNavigation()
         }
         simulationButton.visibility = ViewGroup.GONE
         return simulationButton
@@ -173,17 +194,29 @@ class MainActivity : AppCompatActivity() {
             add(mapContainerId, navigationFragment)
             commit()
         }
+        navigationFragment.lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                if (event.targetState == Lifecycle.State.STARTED) {
+                    navigationFragment.navigationView.hideSpeedView()
+                    navigationFragment.lifecycle.removeObserver(this)
+                }
+            }
+        })
     }
 
     private fun requestLocationPermission() {
         if (isLocationPermissionGranted) {
             mainViewModel.grantLocationPermission(true)
+            setupNavigationUi()
             return
         }
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             val granted = it[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
                     && it[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
             mainViewModel.grantLocationPermission(granted)
+            if (granted) {
+                setupNavigationUi()
+            }
         }.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
@@ -209,13 +242,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            mainViewModel.announcementMessage.collect {
+                if (it.isNotEmpty()) {
+                    Toast.makeText(this@MainActivity, it, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun configureNavigationStart() {
         searchView.visibility = ViewGroup.GONE
         simulationButton.visibility = ViewGroup.GONE
         mapFragment.currentLocationButton.visibilityPolicy = CurrentLocationButton.VisibilityPolicy.Invisible
-        navigationFragment.setTomTomNavigation(tomTomNavigation)
+        navigationFragment.setTomTomNavigation(tomTomNavigationProvider.value)
         navigationFragment.navigationView.showSpeedView()
         navigationFragment.navigationView.showGuidanceView()
         navigationFragment.startNavigation(mainViewModel.selectedRoutePlan.value!!)

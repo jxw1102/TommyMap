@@ -1,4 +1,4 @@
-package com.example.tommymap.ui
+package com.example.tommymap.ui.search
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

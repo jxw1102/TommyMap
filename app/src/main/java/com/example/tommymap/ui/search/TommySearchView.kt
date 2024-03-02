@@ -1,4 +1,4 @@
-package com.example.tommymap.ui
+package com.example.tommymap.ui.search
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -36,13 +36,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tommymap.BuildConfig
+import com.example.tommymap.data.DummyLocationProvider
 import com.example.tommymap.data.Location
 import com.example.tommymap.data.NavigationRepository
 import com.example.tommymap.data.SearchRepositoryImpl
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
-import com.tomtom.sdk.location.LocationProvider
-import com.tomtom.sdk.location.OnLocationUpdateListener
 import com.tomtom.sdk.navigation.RoutePlan
 import com.tomtom.sdk.search.online.OnlineSearch
 import kotlinx.coroutines.Dispatchers
@@ -148,29 +147,6 @@ fun LocationRow(location: Location, onClick: () -> Unit) {
     }
 }
 
-class DummyLocationProvider(override val lastKnownLocation: GeoLocation?) : LocationProvider {
-    override fun addOnLocationUpdateListener(listener: OnLocationUpdateListener) {
-        // do nothing
-    }
-
-    override fun close() {
-        // do nothing
-    }
-
-    override fun disable() {
-        // do nothing
-    }
-
-    override fun enable() {
-        // do nothing
-    }
-
-    override fun removeOnLocationUpdateListener(listener: OnLocationUpdateListener) {
-        // do nothing
-    }
-
-}
-
 class DummyNavRepo(override val destination: StateFlow<GeoPoint?>) : NavigationRepository {
     override fun selectDestination(coordinate: GeoPoint) {
         println("location selected: $coordinate")
@@ -186,12 +162,27 @@ class DummyNavRepo(override val destination: StateFlow<GeoPoint?>) : NavigationR
 fun TommySearchViewPreview() {
     val paris = GeoPoint(48.8573, 2.3522)
     val context = LocalContext.current
+    val fakeNaviRepo = object : NavigationRepository {
+        override val destination: StateFlow<GeoPoint?>
+            get() = MutableStateFlow(null)
+
+        override fun selectDestination(coordinate: GeoPoint) {
+            println("location selected: $coordinate")
+        }
+
+        override fun planRoute(
+            origin: GeoPoint,
+            destination: GeoPoint
+        ): Flow<List<RoutePlan>> {
+            TODO("Not yet implemented")
+        }
+    }
     MaterialTheme {
         TommySearchView(
             SearchViewModel.Factory(
                 DummyLocationProvider(GeoLocation(paris)),
                 SearchRepositoryImpl(OnlineSearch.create(context, BuildConfig.TOMTOM_API_KEY)),
-                DummyNavRepo(MutableStateFlow(null))
+                fakeNaviRepo
             )
         )
     }

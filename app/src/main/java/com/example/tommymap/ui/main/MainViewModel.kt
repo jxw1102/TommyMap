@@ -1,18 +1,16 @@
-package com.example.tommymap
+package com.example.tommymap.ui.main
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.tommymap.R
 import com.example.tommymap.data.NavigationRepository
-import com.tomtom.quantity.Speed
+import com.example.tommymap.data.TommyLocationProvider
+import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
-import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.OnLocationUpdateListener
-import com.tomtom.sdk.location.mapmatched.MapMatchedLocationProvider
-import com.tomtom.sdk.location.simulation.SimulationLocationProvider
-import com.tomtom.sdk.location.simulation.strategy.InterpolationStrategy
 import com.tomtom.sdk.map.display.TomTomMap
 import com.tomtom.sdk.map.display.camera.CameraOptions
 import com.tomtom.sdk.map.display.camera.CameraTrackingMode
@@ -25,43 +23,50 @@ import com.tomtom.sdk.map.display.route.RouteClickListener
 import com.tomtom.sdk.map.display.route.RouteOptions
 import com.tomtom.sdk.navigation.ActiveRouteChangedListener
 import com.tomtom.sdk.navigation.DestinationArrivalListener
+import com.tomtom.sdk.navigation.GuidanceUpdatedListener
 import com.tomtom.sdk.navigation.ProgressUpdatedListener
 import com.tomtom.sdk.navigation.RouteAddedListener
 import com.tomtom.sdk.navigation.RouteAddedReason
 import com.tomtom.sdk.navigation.RoutePlan
 import com.tomtom.sdk.navigation.RouteRemovedListener
 import com.tomtom.sdk.navigation.TomTomNavigation
+import com.tomtom.sdk.navigation.guidance.GuidanceAnnouncement
+import com.tomtom.sdk.navigation.guidance.InstructionPhase
+import com.tomtom.sdk.navigation.guidance.instruction.GuidanceInstruction
 import com.tomtom.sdk.routing.route.Route
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.seconds
 
 class MainViewModel(
-    private val locationProvider: LocationProvider,
+    private val locationProvider: TommyLocationProvider,
+    private val tomTomNavigationProvider: Lazy<TomTomNavigation>,
     private val navigationRepository: NavigationRepository
 ) : ViewModel() {
 
-//    private val destinationMarkerTag = "Destination"
+    private val destinationMarkerTag = "Destination"
 
     private val _permissionStateFlow = MutableStateFlow(false)
     private val _navigationStarted = MutableStateFlow(false)
     private val _destinationArrived = MutableStateFlow(false)
+    private val _announcementMessage = MutableStateFlow("")
 
     val navigationStarted: StateFlow<Boolean> = _navigationStarted
     val destinationArrived: StateFlow<Boolean> = _destinationArrived
+    val announcementMessage: StateFlow<String> = _announcementMessage
 
     private lateinit var tomTomMap: TomTomMap
-    private lateinit var tomTomNavigation: TomTomNavigation
+    
+    private val tomTomNavigation: TomTomNavigation
+        get() = tomTomNavigationProvider.value
 
     private var routePlans: MutableList<RoutePlan> = mutableListOf()
     private val _selectedRoutePlan = MutableStateFlow<RoutePlan?>(null)
     val selectedRoutePlan: StateFlow<RoutePlan?> = _selectedRoutePlan
 
-    private val origin: GeoPoint
-        get() = locationProvider.lastKnownLocation?.position ?: GeoPoint(0.0, 0.0)
+    private val origin: GeoPoint?
+        get() = locationProvider.lastKnownLocation?.position
 
     private val routeAddedListener by lazy {
         RouteAddedListener { route, _, routeAddedReason ->
@@ -115,6 +120,32 @@ class MainViewModel(
         drawRoute(_selectedRoutePlan.value!!.route, withZoom = false)
     }
 
+    private val guidanceUpdatedListener = object : GuidanceUpdatedListener {
+        override fun onAnnouncementGenerated(
+            announcement: GuidanceAnnouncement,
+            shouldPlay: Boolean
+        ) {
+            _announcementMessage.value = announcement.plainTextMessage
+        }
+
+        override fun onDistanceToNextInstructionChanged(
+            distance: Distance,
+            instructions: List<GuidanceInstruction>,
+            currentPhase: InstructionPhase
+        ) {
+            // do nothing
+        }
+
+        override fun onInstructionsChanged(instructions: List<GuidanceInstruction>) {
+            // do nothing
+        }
+    }
+
+    override fun onCleared() {
+        tomTomMap.setLocationProvider(null)
+        super.onCleared()
+    }
+
     fun grantLocationPermission(granted: Boolean) {
         _permissionStateFlow.value = granted
     }
@@ -126,30 +157,22 @@ class MainViewModel(
         tomTomMap.addRouteClickListener(routeClickListener)
     }
 
-    fun startNavigation(navigation: TomTomNavigation) {
-        tomTomNavigation = navigation
+    fun startNavigation() {
         _navigationStarted.value = true
         _destinationArrived.value = false
-        val strategy = InterpolationStrategy(
-            locations = _selectedRoutePlan.value!!.route.geometry.map { GeoLocation(it) },
-            startDelay = 1.seconds,
-            broadcastDelay = 200.milliseconds,
-            currentSpeed = Speed.metersPerSecond(25)
-        )
-        val simulationLocationProvider = SimulationLocationProvider.create(strategy).also { it.enable() }
-        tomTomNavigation.locationProvider = simulationLocationProvider
+        tomTomNavigation.locationProvider = TommyLocationProvider.createSimulationLocationProvider(selectedRoutePlan.value!!.route)
         tomTomNavigation.addProgressUpdatedListener(progressUpdatedListener)
         tomTomNavigation.addRouteAddedListener(routeAddedListener)
         tomTomNavigation.addRouteRemovedListener(routeRemovedListener)
         tomTomNavigation.addActiveRouteChangedListener(activeRouteChangedListener)
         tomTomNavigation.addDestinationArrivalListener(destinationArrivalListener)
+        tomTomNavigation.addGuidanceUpdatedListener(guidanceUpdatedListener)
     }
 
     fun onNavigationStarted(bottomPadding: Int) {
         tomTomMap.cameraTrackingMode = CameraTrackingMode.FollowRouteDirection
         tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
-        val mapMatchedLocationProvider = MapMatchedLocationProvider(tomTomNavigation)
-        tomTomMap.setLocationProvider(mapMatchedLocationProvider)
+        locationProvider.useMapMatchedLocationProvider(tomTomNavigation)
         tomTomMap.setPadding(Padding(0, 0, 0, bottomPadding))
     }
 
@@ -159,10 +182,13 @@ class MainViewModel(
         tomTomNavigation.removeRouteRemovedListener(routeRemovedListener)
         tomTomNavigation.removeActiveRouteChangedListener(activeRouteChangedListener)
         tomTomNavigation.removeDestinationArrivalListener(destinationArrivalListener)
+        tomTomNavigation.removeGuidanceUpdatedListener(guidanceUpdatedListener)
         _navigationStarted.value = false
+        locationProvider.useAndroidLocationProvider()
         tomTomMap.cameraTrackingMode = CameraTrackingMode.None
         tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
         tomTomMap.setPadding(Padding(0, 0, 0, 0))
+        clearMap()
     }
 
     private fun listenToCurrentPosition() {
@@ -172,6 +198,7 @@ class MainViewModel(
         viewModelScope.launch {
             _permissionStateFlow.collect { granted ->
                 if (!granted) return@collect
+                locationProvider.useAndroidLocationProvider()
                 tomTomMap.setLocationProvider(locationProvider.also { it.enable() })
                 locationProvider.addOnLocationUpdateListener(object : OnLocationUpdateListener {
                     override fun onLocationUpdate(location: GeoLocation) {
@@ -187,15 +214,18 @@ class MainViewModel(
         viewModelScope.launch {
             navigationRepository.destination.collect { value ->
                 value?.let { destination ->
-//                    showDestinationMarker(destination)
-                    navigationRepository.planRoute(origin, destination).catch {
+                    if (!_permissionStateFlow.value) {
+                        showDestinationMarker(destination)
+                    }
+                    if (origin == null) return@let
+                    navigationRepository.planRoute(origin!!, destination).catch {
                         Log.e("TommyMain", "${it.javaClass.name} ${it.message}")
                     }.collect { routePlans ->
-                        this@MainViewModel.routePlans = routePlans.toMutableList()
                         tomTomMap.removeRoutes()
-                        routePlans.drop(1).forEach { drawRoute(it.route, RouteOptions.DEFAULT_UNREACHABLE_COLOR, withDepartureMarker = true, withZoom = false) }
                         _selectedRoutePlan.value = routePlans.first()
+                        routePlans.drop(1).forEach { drawRoute(it.route, RouteOptions.DEFAULT_UNREACHABLE_COLOR, withDepartureMarker = true, withZoom = false) }
                         drawRoute(routePlans.first().route, RouteOptions.DEFAULT_COLOR, withDepartureMarker = true, withZoom = true)
+                        this@MainViewModel.routePlans = routePlans.toMutableList()
                     }
                 }
             }
@@ -207,22 +237,29 @@ class MainViewModel(
             tomTomMap.moveCamera(
                 CameraOptions(
                     position = it,
-                    zoom = 10.0
+                    zoom = 10.0,
+                    tilt = 0.0
                 )
             )
         }
     }
 
-//    private fun showDestinationMarker(destination: GeoPoint) {
-//        tomTomMap.removeMarkers(destinationMarkerTag)
-//        val markerOpt = MarkerOptions(
-//            destination,
-//            ImageFactory.fromResource(R.drawable.ic_pin),
-//            tag = destinationMarkerTag
-//        )
-//        tomTomMap.addMarker(markerOpt)
-//        tomTomMap.moveCamera(CameraOptions(destination, zoom = 15.0))
-//    }
+    private fun showDestinationMarker(destination: GeoPoint) {
+        tomTomMap.removeMarkers(destinationMarkerTag)
+        val markerOpt = MarkerOptions(
+            destination,
+            ImageFactory.fromResource(R.drawable.ic_pin),
+            tag = destinationMarkerTag
+        )
+        tomTomMap.addMarker(markerOpt)
+        tomTomMap.moveCamera(CameraOptions(destination, zoom = 10.0))
+    }
+
+    private fun clearMap() {
+        tomTomMap.removeRoutes()
+        tomTomMap.removeMarkers(destinationMarkerTag)
+        moveMapCamera()
+    }
 
     private fun drawRoute(
         route: Route,
@@ -253,16 +290,16 @@ class MainViewModel(
     }
 
     class Factory(
-        private val locationProvider: LocationProvider,
+        private val locationProvider: TommyLocationProvider,
+        private val tomTomNavigationProvider: Lazy<TomTomNavigation>,
         private val navigationRepository: NavigationRepository
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(locationProvider, navigationRepository) as T
+                return MainViewModel(locationProvider, tomTomNavigationProvider, navigationRepository) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
-
 }
