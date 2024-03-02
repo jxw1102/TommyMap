@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import androidx.core.view.get
 import androidx.core.view.setMargins
@@ -195,7 +196,7 @@ class MainActivity : AppCompatActivity() {
         ).apply {
             gravity = Gravity.BOTTOM or Gravity.END
             rightMargin = dp2px(20)
-            bottomMargin = dp2px(50)
+            bottomMargin = dp2px(70)
         }
         simulationButton.text = "Start Simulation"
         simulationButton.setOnClickListener {
@@ -223,7 +224,7 @@ class MainActivity : AppCompatActivity() {
                     navigationFragment.lifecycle.removeObserver(this)
 
                     ViewCompat.setOnApplyWindowInsetsListener(navigationFragment.navigationView) { v, insets ->
-                        v.setPadding(0, 0, 0, insets.systemGestureInsets.bottom)
+                        v.setPadding(0, 0, 0, insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom)
                         insets
                     }
                 }

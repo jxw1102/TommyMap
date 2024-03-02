@@ -104,7 +104,7 @@ class MainViewModel(
 
     private val progressUpdatedListener = ProgressUpdatedListener {
         Log.d("TommyMain", "ProgressUpdatedListener $it")
-        tomTomMap.routes.first().progress = it.distanceAlongRoute
+        tomTomMap.routes.firstOrNull()?.progress = it.distanceAlongRoute
     }
 
     private val destinationArrivalListener = DestinationArrivalListener { route ->
