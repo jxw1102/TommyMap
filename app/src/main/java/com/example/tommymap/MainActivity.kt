@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
+import com.example.tommymap.ui.TommySearchView
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.android.AndroidLocationProvider
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var searchView: View
 
     private val mapContainerId = View.generateViewId()
 
@@ -42,7 +45,9 @@ class MainActivity : AppCompatActivity() {
         val frameLayout = FrameLayout(this)
         frameLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         setContentView(frameLayout)
+
         frameLayout.addView(setupMapContainer())
+        frameLayout.addView(setupSearchView())
 
         requestLocationPermission()
     }
@@ -62,6 +67,19 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.setupMap(it)
         }
         return mapContainer
+    }
+
+    private fun setupSearchView(): View {
+        searchView = ComposeView(this).apply {
+            setContent {
+                TommySearchView()
+            }
+        }
+        searchView.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        return searchView
     }
 
     private fun requestLocationPermission() {
