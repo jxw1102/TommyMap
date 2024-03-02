@@ -21,6 +21,7 @@ import com.tomtom.sdk.map.display.image.ImageFactory
 import com.tomtom.sdk.map.display.location.LocationMarkerOptions
 import com.tomtom.sdk.map.display.marker.MarkerOptions
 import com.tomtom.sdk.map.display.route.Instruction
+import com.tomtom.sdk.map.display.route.RouteClickListener
 import com.tomtom.sdk.map.display.route.RouteOptions
 import com.tomtom.sdk.navigation.ActiveRouteChangedListener
 import com.tomtom.sdk.navigation.DestinationArrivalListener
@@ -43,7 +44,7 @@ class MainViewModel(
     private val navigationRepository: NavigationRepository
 ) : ViewModel() {
 
-    private val destinationMarkerTag = "Destination"
+//    private val destinationMarkerTag = "Destination"
 
     private val _permissionStateFlow = MutableStateFlow(false)
     private val _navigationStarted = MutableStateFlow(false)
@@ -55,8 +56,9 @@ class MainViewModel(
     private lateinit var tomTomMap: TomTomMap
     private lateinit var tomTomNavigation: TomTomNavigation
 
-    private val _routePlan = MutableStateFlow<RoutePlan?>(null)
-    val routePlan: StateFlow<RoutePlan?> = _routePlan
+    private var routePlans: MutableList<RoutePlan> = mutableListOf()
+    private val _selectedRoutePlan = MutableStateFlow<RoutePlan?>(null)
+    val selectedRoutePlan: StateFlow<RoutePlan?> = _selectedRoutePlan
 
     private val origin: GeoPoint
         get() = locationProvider.lastKnownLocation?.position ?: GeoPoint(0.0, 0.0)
@@ -105,6 +107,14 @@ class MainViewModel(
         _destinationArrived.value = true
     }
 
+    private val routeClickListener = RouteClickListener { route ->
+        if (tomTomMap.cameraTrackingMode == CameraTrackingMode.FollowRouteDirection) return@RouteClickListener
+        _selectedRoutePlan.value = routePlans.first { it.route.id.toString() == route.tag }
+        route.remove()
+        tomTomMap.routes.forEach { it.color = RouteOptions.DEFAULT_UNREACHABLE_COLOR }
+        drawRoute(_selectedRoutePlan.value!!.route, withZoom = false)
+    }
+
     fun grantLocationPermission(granted: Boolean) {
         _permissionStateFlow.value = granted
     }
@@ -113,6 +123,7 @@ class MainViewModel(
         this.tomTomMap = tomTomMap
         listenToCurrentPosition()
         listenToDestination()
+        tomTomMap.addRouteClickListener(routeClickListener)
     }
 
     fun startNavigation(navigation: TomTomNavigation) {
@@ -120,7 +131,7 @@ class MainViewModel(
         _navigationStarted.value = true
         _destinationArrived.value = false
         val strategy = InterpolationStrategy(
-            locations = _routePlan.value!!.route.geometry.map { GeoLocation(it) },
+            locations = _selectedRoutePlan.value!!.route.geometry.map { GeoLocation(it) },
             startDelay = 1.seconds,
             broadcastDelay = 200.milliseconds,
             currentSpeed = Speed.metersPerSecond(25)
@@ -176,13 +187,15 @@ class MainViewModel(
         viewModelScope.launch {
             navigationRepository.destination.collect { value ->
                 value?.let { destination ->
-                    showDestinationMarker(destination)
+//                    showDestinationMarker(destination)
                     navigationRepository.planRoute(origin, destination).catch {
                         Log.e("TommyMain", "${it.javaClass.name} ${it.message}")
-                    }.collect { routePlan ->
+                    }.collect { routePlans ->
+                        this@MainViewModel.routePlans = routePlans.toMutableList()
                         tomTomMap.removeRoutes()
-                        _routePlan.value = routePlan
-                        drawRoute(routePlan.route, RouteOptions.DEFAULT_COLOR, withDepartureMarker = true, withZoom = true)
+                        routePlans.drop(1).forEach { drawRoute(it.route, RouteOptions.DEFAULT_UNREACHABLE_COLOR, withDepartureMarker = true, withZoom = false) }
+                        _selectedRoutePlan.value = routePlans.first()
+                        drawRoute(routePlans.first().route, RouteOptions.DEFAULT_COLOR, withDepartureMarker = true, withZoom = true)
                     }
                 }
             }
@@ -200,16 +213,16 @@ class MainViewModel(
         }
     }
 
-    private fun showDestinationMarker(destination: GeoPoint) {
-        tomTomMap.removeMarkers(destinationMarkerTag)
-        val markerOpt = MarkerOptions(
-            destination,
-            ImageFactory.fromResource(R.drawable.ic_pin),
-            tag = destinationMarkerTag
-        )
-        tomTomMap.addMarker(markerOpt)
-        tomTomMap.moveCamera(CameraOptions(destination, zoom = 15.0))
-    }
+//    private fun showDestinationMarker(destination: GeoPoint) {
+//        tomTomMap.removeMarkers(destinationMarkerTag)
+//        val markerOpt = MarkerOptions(
+//            destination,
+//            ImageFactory.fromResource(R.drawable.ic_pin),
+//            tag = destinationMarkerTag
+//        )
+//        tomTomMap.addMarker(markerOpt)
+//        tomTomMap.moveCamera(CameraOptions(destination, zoom = 15.0))
+//    }
 
     private fun drawRoute(
         route: Route,

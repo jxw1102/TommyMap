@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.flowOn
 interface NavigationRepository {
     val destination: StateFlow<GeoPoint?>
     fun selectDestination(coordinate: GeoPoint)
-    fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<RoutePlan>
+    fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<List<RoutePlan>>
 }
 
 class NavigationRepositoryImpl(
@@ -45,8 +45,8 @@ class NavigationRepositoryImpl(
         )
         val result = routePlanner.planRoute(routePlanningOptions)
         if (result.isSuccess()) {
-            val routePlan = RoutePlan(result.value().routes.first(), routePlanningOptions)
-            emit(routePlan)
+            val routePlans = result.value().routes.map { RoutePlan(it, routePlanningOptions) }
+            emit(routePlans)
         } else {
             throw NavigationException(result.failure().message)
         }

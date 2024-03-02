@@ -176,7 +176,7 @@ class DummyNavRepo(override val destination: StateFlow<GeoPoint?>) : NavigationR
         println("location selected: $coordinate")
     }
 
-    override fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<RoutePlan> {
+    override fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<List<RoutePlan>> {
         TODO("Not yet implemented")
     }
 }

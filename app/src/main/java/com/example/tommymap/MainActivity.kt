@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureViewModel() {
         lifecycleScope.launch {
-            mainViewModel.routePlan.collect {
+            mainViewModel.selectedRoutePlan.collect {
                 if (it != null) {
                     simulationButton.visibility = ViewGroup.VISIBLE
                 }
@@ -218,7 +218,7 @@ class MainActivity : AppCompatActivity() {
         navigationFragment.setTomTomNavigation(tomTomNavigation)
         navigationFragment.navigationView.showSpeedView()
         navigationFragment.navigationView.showGuidanceView()
-        navigationFragment.startNavigation(mainViewModel.routePlan.value!!)
+        navigationFragment.startNavigation(mainViewModel.selectedRoutePlan.value!!)
         navigationFragment.addNavigationListener(navigationListener)
     }
 
