@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
+import com.example.tommymap.data.NavigationRepository
+import com.example.tommymap.data.NavigationRepositoryImpl
 import com.example.tommymap.data.SearchRepositoryImpl
 import com.example.tommymap.ui.SearchViewModel
 import com.example.tommymap.ui.TommySearchView
@@ -19,6 +21,9 @@ import com.tomtom.sdk.location.android.AndroidLocationProvider
 import com.tomtom.sdk.location.android.AndroidLocationProviderConfig
 import com.tomtom.sdk.map.display.MapOptions
 import com.tomtom.sdk.map.display.ui.MapFragment
+import com.tomtom.sdk.navigation.routereplanner.online.OnlineRouteReplannerFactory
+import com.tomtom.sdk.routing.RoutePlanner
+import com.tomtom.sdk.routing.online.OnlineRoutePlanner
 import com.tomtom.sdk.search.Search
 import com.tomtom.sdk.search.online.OnlineSearch
 import kotlin.time.Duration.Companion.milliseconds
@@ -32,6 +37,12 @@ class MainActivity : AppCompatActivity() {
     }
     private val onlineSearch: Search by lazy {
         OnlineSearch.create(this, BuildConfig.TOMTOM_API_KEY)
+    }
+    private val routePlanner: RoutePlanner by lazy {
+        OnlineRoutePlanner.create(this, BuildConfig.TOMTOM_API_KEY)
+    }
+    private val navigationRepository: NavigationRepository by lazy {
+        NavigationRepositoryImpl(routePlanner)
     }
     // ----
 
@@ -48,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val factory = MainViewModel.Factory(locationProvider)
+        val factory = MainViewModel.Factory(locationProvider, navigationRepository)
         mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         val frameLayout = FrameLayout(this)
@@ -80,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSearchView(): View {
         searchView = ComposeView(this).apply {
-            val factory = SearchViewModel.Factory(locationProvider, SearchRepositoryImpl(onlineSearch))
+            val factory = SearchViewModel.Factory(locationProvider, SearchRepositoryImpl(onlineSearch), navigationRepository)
             setContent {
                 TommySearchView(factory)
             }

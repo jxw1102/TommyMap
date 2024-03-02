@@ -1,20 +1,16 @@
 package com.example.tommymap
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.example.tommymap.data.NavigationRepositoryImpl
 import com.example.tommymap.data.SearchRepositoryImpl
-import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
+import com.tomtom.sdk.routing.online.OnlineRoutePlanner
 import com.tomtom.sdk.search.online.OnlineSearch
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
-
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -44,6 +40,20 @@ class ExampleInstrumentedTest {
                 assert(it.isNotEmpty())
             }
         }
-        // GeoPoint(latitude=48.861018, longitude=2.335851)
     }
+
+    @Test
+    fun testRoutePlanning() {
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        val routePlanner = OnlineRoutePlanner.create(appContext, BuildConfig.TOMTOM_API_KEY)
+        val repo = NavigationRepositoryImpl(routePlanner)
+        val cityHall = GeoPoint(48.8573, 2.3522)
+        val louvreMuseum = GeoPoint(latitude=48.861018, longitude=2.335851)
+        runTest {
+            repo.planRoute(cityHall, louvreMuseum).collect { route ->
+                println(route)
+            }
+        }
+    }
+
 }

@@ -11,6 +11,9 @@
       <entry key="testOnlineSearch()">
         <State />
       </entry>
+      <entry key="testRoutePlanning()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>

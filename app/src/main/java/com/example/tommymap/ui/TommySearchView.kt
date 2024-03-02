@@ -36,14 +36,19 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tommymap.BuildConfig
 import com.example.tommymap.data.Location
+import com.example.tommymap.data.NavigationRepository
 import com.example.tommymap.data.SearchRepositoryImpl
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.OnLocationUpdateListener
+import com.tomtom.sdk.routing.route.Route
 import com.tomtom.sdk.search.online.OnlineSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -111,7 +116,7 @@ fun TommySearchView(
                 LocationRow(location) {
                     isSearching = false
                     query = location.name
-                    // notify outside about selected location
+                    searchViewModel.selectLocation(location)
                 }
             }
         }
@@ -164,6 +169,16 @@ class DummyLocationProvider(override val lastKnownLocation: GeoLocation?) : Loca
 
 }
 
+class DummyNavRepo(override val destination: StateFlow<GeoPoint?>) : NavigationRepository {
+    override fun selectDestination(coordinate: GeoPoint) {
+        println("location selected: $coordinate")
+    }
+
+    override fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<Route> {
+        TODO("Not yet implemented")
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun TommySearchViewPreview() {
@@ -173,7 +188,8 @@ fun TommySearchViewPreview() {
         TommySearchView(
             SearchViewModel.Factory(
                 DummyLocationProvider(GeoLocation(paris)),
-                SearchRepositoryImpl(OnlineSearch.create(context, BuildConfig.TOMTOM_API_KEY))
+                SearchRepositoryImpl(OnlineSearch.create(context, BuildConfig.TOMTOM_API_KEY)),
+                DummyNavRepo(MutableStateFlow(null))
             )
         )
     }
