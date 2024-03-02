@@ -57,7 +57,7 @@ class MainViewModel(
     val announcementMessage: StateFlow<String> = _announcementMessage
 
     private lateinit var tomTomMap: TomTomMap
-    
+
     private val tomTomNavigation: TomTomNavigation
         get() = tomTomNavigationProvider.value
 

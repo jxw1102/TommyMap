@@ -12,6 +12,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
+import androidx.core.view.ViewCompat
+import androidx.core.view.children
+import androidx.core.view.get
+import androidx.core.view.setMargins
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -45,6 +49,7 @@ import com.tomtom.sdk.search.online.OnlineSearch
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import java.util.Locale
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -103,8 +108,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val factory =
-            MainViewModel.Factory(locationProvider, tomTomNavigationProvider, navigationRepository)
+        val factory = MainViewModel.Factory(locationProvider, tomTomNavigationProvider, navigationRepository)
         mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         val frameLayout = FrameLayout(this)
@@ -128,6 +132,24 @@ class MainActivity : AppCompatActivity() {
             tomTomNavigationProvider.value.close()
         }
         super.onDestroy()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        hackSafeArea()
+    }
+
+    /// dirty but works
+    private fun hackSafeArea() {
+        val layout = (mapFragment.view as? ViewGroup)?.getChildAt(0) as? ViewGroup
+        val uiComponent = layout?.children?.findLast { it.javaClass.name == "com.tomtom.sdk.map.display.ui.UiComponentsView" } as? ViewGroup
+        uiComponent?.fitsSystemWindows = true
+        val compassButton = uiComponent?.children?.findLast { it.javaClass.name == "com.tomtom.sdk.map.display.ui.compass.DefaultCompassButton" }
+        val layoutParams = compassButton?.layoutParams as? ViewGroup.MarginLayoutParams
+        layoutParams?.let {
+            it.setMargins(it.leftMargin, it.topMargin + dp2px(65), it.rightMargin, it.bottomMargin)
+        }
+        compassButton?.layoutParams = layoutParams
     }
 
     private fun setupMapContainer(): FragmentContainerView {
@@ -199,6 +221,11 @@ class MainActivity : AppCompatActivity() {
                 if (event.targetState == Lifecycle.State.STARTED) {
                     navigationFragment.navigationView.hideSpeedView()
                     navigationFragment.lifecycle.removeObserver(this)
+
+                    ViewCompat.setOnApplyWindowInsetsListener(navigationFragment.navigationView) { v, insets ->
+                        v.setPadding(0, 0, 0, insets.systemGestureInsets.bottom)
+                        insets
+                    }
                 }
             }
         })
