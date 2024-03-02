@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private val mapContainerId = View.generateViewId()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         val factory = MainViewModel.Factory(locationProvider)

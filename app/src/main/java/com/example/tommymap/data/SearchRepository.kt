@@ -24,8 +24,8 @@ class SearchRepositoryImpl(
         val searchOptions = SearchOptions(
             query = text,
             geoBias = geoBias,
-            limit = 15,
-            searchAreas = geoBias?.let { setOf(CircleGeometry(it, Distance.kilometers(20))) } ?: emptySet()
+            limit = 10,
+            searchAreas = geoBias?.let { setOf(CircleGeometry(it, Distance.kilometers(10))) } ?: emptySet()
         )
         val result = searchDataSource.search(searchOptions)
         if (result.isSuccess()) {
