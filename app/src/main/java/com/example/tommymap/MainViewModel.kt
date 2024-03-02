@@ -1,20 +1,42 @@
 package com.example.tommymap
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.tommymap.data.NavigationRepository
+import com.tomtom.quantity.Speed
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.OnLocationUpdateListener
+import com.tomtom.sdk.location.mapmatched.MapMatchedLocationProvider
+import com.tomtom.sdk.location.simulation.SimulationLocationProvider
+import com.tomtom.sdk.location.simulation.strategy.InterpolationStrategy
 import com.tomtom.sdk.map.display.TomTomMap
 import com.tomtom.sdk.map.display.camera.CameraOptions
+import com.tomtom.sdk.map.display.camera.CameraTrackingMode
+import com.tomtom.sdk.map.display.common.screen.Padding
 import com.tomtom.sdk.map.display.image.ImageFactory
 import com.tomtom.sdk.map.display.location.LocationMarkerOptions
 import com.tomtom.sdk.map.display.marker.MarkerOptions
+import com.tomtom.sdk.map.display.route.Instruction
+import com.tomtom.sdk.map.display.route.RouteOptions
+import com.tomtom.sdk.navigation.ActiveRouteChangedListener
+import com.tomtom.sdk.navigation.DestinationArrivalListener
+import com.tomtom.sdk.navigation.ProgressUpdatedListener
+import com.tomtom.sdk.navigation.RouteAddedListener
+import com.tomtom.sdk.navigation.RouteAddedReason
+import com.tomtom.sdk.navigation.RoutePlan
+import com.tomtom.sdk.navigation.RouteRemovedListener
+import com.tomtom.sdk.navigation.TomTomNavigation
+import com.tomtom.sdk.routing.route.Route
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 class MainViewModel(
     private val locationProvider: LocationProvider,
@@ -24,11 +46,64 @@ class MainViewModel(
     private val destinationMarkerTag = "Destination"
 
     private val _permissionStateFlow = MutableStateFlow(false)
+    private val _navigationStarted = MutableStateFlow(false)
+    private val _destinationArrived = MutableStateFlow(false)
+
+    val navigationStarted: StateFlow<Boolean> = _navigationStarted
+    val destinationArrived: StateFlow<Boolean> = _destinationArrived
 
     private lateinit var tomTomMap: TomTomMap
+    private lateinit var tomTomNavigation: TomTomNavigation
+
+    private val _routePlan = MutableStateFlow<RoutePlan?>(null)
+    val routePlan: StateFlow<RoutePlan?> = _routePlan
 
     private val origin: GeoPoint
         get() = locationProvider.lastKnownLocation?.position ?: GeoPoint(0.0, 0.0)
+
+    private val routeAddedListener by lazy {
+        RouteAddedListener { route, _, routeAddedReason ->
+            Log.d("TommyMain", "RouteAddedListener ${route.id} ${routeAddedReason.javaClass.name}")
+            if (routeAddedReason !is RouteAddedReason.NavigationStarted) {
+                drawRoute(
+                    route = route,
+                    color = RouteOptions.DEFAULT_UNREACHABLE_COLOR,
+                    withDepartureMarker = false,
+                    withZoom = false
+                )
+            }
+        }
+    }
+
+    private val routeRemovedListener by lazy {
+        RouteRemovedListener { route, _ ->
+            Log.d("TommyMain", "RouteRemovedListener ${route.id}")
+            tomTomMap.routes.find { it.tag == route.id.toString() }?.remove()
+        }
+    }
+
+    private val activeRouteChangedListener by lazy {
+        ActiveRouteChangedListener { route ->
+            Log.d("TommyMain", "ActiveRouteChangedListener ${route.id}")
+            tomTomMap.routes.forEach {
+                if (it.tag == route.id.toString()) {
+                    it.color = RouteOptions.DEFAULT_COLOR
+                } else {
+                    it.color = RouteOptions.DEFAULT_UNREACHABLE_COLOR
+                }
+            }
+        }
+    }
+
+    private val progressUpdatedListener = ProgressUpdatedListener {
+        Log.d("TommyMain", "ProgressUpdatedListener $it")
+        tomTomMap.routes.first().progress = it.distanceAlongRoute
+    }
+
+    private val destinationArrivalListener = DestinationArrivalListener { route ->
+        Log.d("TommyMain", "DestinationArrivalListener ${route.id}")
+        _destinationArrived.value = true
+    }
 
     fun grantLocationPermission(granted: Boolean) {
         _permissionStateFlow.value = granted
@@ -38,6 +113,45 @@ class MainViewModel(
         this.tomTomMap = tomTomMap
         listenToCurrentPosition()
         listenToDestination()
+    }
+
+    fun startNavigation(navigation: TomTomNavigation) {
+        tomTomNavigation = navigation
+        _navigationStarted.value = true
+        _destinationArrived.value = false
+        val strategy = InterpolationStrategy(
+            locations = _routePlan.value!!.route.geometry.map { GeoLocation(it) },
+            startDelay = 1.seconds,
+            broadcastDelay = 200.milliseconds,
+            currentSpeed = Speed.metersPerSecond(25)
+        )
+        val simulationLocationProvider = SimulationLocationProvider.create(strategy).also { it.enable() }
+        tomTomNavigation.locationProvider = simulationLocationProvider
+        tomTomNavigation.addProgressUpdatedListener(progressUpdatedListener)
+        tomTomNavigation.addRouteAddedListener(routeAddedListener)
+        tomTomNavigation.addRouteRemovedListener(routeRemovedListener)
+        tomTomNavigation.addActiveRouteChangedListener(activeRouteChangedListener)
+        tomTomNavigation.addDestinationArrivalListener(destinationArrivalListener)
+    }
+
+    fun onNavigationStarted(bottomPadding: Int) {
+        tomTomMap.cameraTrackingMode = CameraTrackingMode.FollowRouteDirection
+        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
+        val mapMatchedLocationProvider = MapMatchedLocationProvider(tomTomNavigation)
+        tomTomMap.setLocationProvider(mapMatchedLocationProvider)
+        tomTomMap.setPadding(Padding(0, 0, 0, bottomPadding))
+    }
+
+    fun stopNavigation() {
+        tomTomNavigation.removeProgressUpdatedListener(progressUpdatedListener)
+        tomTomNavigation.removeRouteAddedListener(routeAddedListener)
+        tomTomNavigation.removeRouteRemovedListener(routeRemovedListener)
+        tomTomNavigation.removeActiveRouteChangedListener(activeRouteChangedListener)
+        tomTomNavigation.removeDestinationArrivalListener(destinationArrivalListener)
+        _navigationStarted.value = false
+        tomTomMap.cameraTrackingMode = CameraTrackingMode.None
+        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
+        tomTomMap.setPadding(Padding(0, 0, 0, 0))
     }
 
     private fun listenToCurrentPosition() {
@@ -63,9 +177,12 @@ class MainViewModel(
             navigationRepository.destination.collect { value ->
                 value?.let { destination ->
                     showDestinationMarker(destination)
-                    navigationRepository.planRoute(origin, destination).collect {
-                        println(it)
-                        // draw route
+                    navigationRepository.planRoute(origin, destination).catch {
+                        Log.e("TommyMain", "${it.javaClass.name} ${it.message}")
+                    }.collect { routePlan ->
+                        tomTomMap.removeRoutes()
+                        _routePlan.value = routePlan
+                        drawRoute(routePlan.route, RouteOptions.DEFAULT_COLOR, withDepartureMarker = true, withZoom = true)
                     }
                 }
             }
@@ -92,6 +209,34 @@ class MainViewModel(
         )
         tomTomMap.addMarker(markerOpt)
         tomTomMap.moveCamera(CameraOptions(destination, zoom = 15.0))
+    }
+
+    private fun drawRoute(
+        route: Route,
+        color: Int = RouteOptions.DEFAULT_COLOR,
+        withDepartureMarker: Boolean = true,
+        withZoom: Boolean = true
+    ) {
+        val instructions = route.legs
+            .flatMap { routeLeg -> routeLeg.instructions }
+            .map {
+                Instruction(
+                    routeOffset = it.routeOffset
+                )
+            }
+        val routeOptions = RouteOptions(
+            geometry = route.geometry,
+            destinationMarkerVisible = true,
+            departureMarkerVisible = withDepartureMarker,
+            instructions = instructions,
+            routeOffset = route.routePoints.map { it.routeOffset },
+            color = color,
+            tag = route.id.toString()
+        )
+        tomTomMap.addRoute(routeOptions)
+        if (withZoom) {
+            tomTomMap.zoomToRoutes(100)
+        }
     }
 
     class Factory(

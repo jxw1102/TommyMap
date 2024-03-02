@@ -6,4 +6,6 @@
     </style>
 
     <style name="Theme.TommyMap" parent="Base.Theme.TommyMap" />
+
+    <dimen name="map_padding_bottom">263.0dp</dimen>
 </resources>

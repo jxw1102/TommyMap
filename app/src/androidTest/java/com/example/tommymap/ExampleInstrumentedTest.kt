@@ -50,8 +50,8 @@ class ExampleInstrumentedTest {
         val cityHall = GeoPoint(48.8573, 2.3522)
         val louvreMuseum = GeoPoint(latitude=48.861018, longitude=2.335851)
         runTest {
-            repo.planRoute(cityHall, louvreMuseum).collect { route ->
-                println(route)
+            repo.planRoute(cityHall, louvreMuseum).collect { routePlan ->
+                println(routePlan)
             }
         }
     }

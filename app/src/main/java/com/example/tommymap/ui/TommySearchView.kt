@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -42,7 +43,7 @@ import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.OnLocationUpdateListener
-import com.tomtom.sdk.routing.route.Route
+import com.tomtom.sdk.navigation.RoutePlan
 import com.tomtom.sdk.search.online.OnlineSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -75,6 +76,7 @@ fun TommySearchView(
         onActiveChange = { isSearching = !isSearching },
         modifier = Modifier
             .fillMaxWidth()
+            .systemBarsPadding()
             .padding(16.dp),
         leadingIcon = {
             Icon(
@@ -174,7 +176,7 @@ class DummyNavRepo(override val destination: StateFlow<GeoPoint?>) : NavigationR
         println("location selected: $coordinate")
     }
 
-    override fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<Route> {
+    override fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<RoutePlan> {
         TODO("Not yet implemented")
     }
 }
