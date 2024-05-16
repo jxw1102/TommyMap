@@ -24,10 +24,13 @@ class TommyLocationProvider(
 
     private var _currentLocationProvider: LocationProvider
 
+    private val listeners = mutableListOf<OnLocationUpdateListener>()
+
     override val lastKnownLocation: GeoLocation?
         get() = _currentLocationProvider.lastKnownLocation
 
     override fun addOnLocationUpdateListener(listener: OnLocationUpdateListener) {
+        listeners.add(listener)
         _currentLocationProvider.addOnLocationUpdateListener(listener)
     }
 
@@ -40,6 +43,7 @@ class TommyLocationProvider(
     }
 
     override fun removeOnLocationUpdateListener(listener: OnLocationUpdateListener) {
+        listeners.remove(listener)
         _currentLocationProvider.removeOnLocationUpdateListener(listener)
     }
 
@@ -58,12 +62,14 @@ class TommyLocationProvider(
         if (context.isLocationPermissionGranted) {
             enable()
         }
+        listeners.forEach { _currentLocationProvider.addOnLocationUpdateListener(it) }
     }
 
     fun useMapMatchedLocationProvider(navigation: TomTomNavigation) {
         close()
         _currentLocationProvider = MapMatchedLocationProvider(navigation)
         enable()
+        listeners.forEach { _currentLocationProvider.addOnLocationUpdateListener(it) }
     }
 
     companion object {
