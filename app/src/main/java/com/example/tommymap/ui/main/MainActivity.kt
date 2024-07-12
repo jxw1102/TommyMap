@@ -2,6 +2,7 @@ package com.example.tommymap.ui.main
 
 import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import androidx.core.view.get
-import androidx.core.view.setMargins
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -33,9 +32,29 @@ import com.example.tommymap.dp2px
 import com.example.tommymap.isLocationPermissionGranted
 import com.example.tommymap.ui.search.SearchViewModel
 import com.example.tommymap.ui.search.TommySearchView
+import com.tomtom.sdk.common.Result
+import com.tomtom.sdk.common.functional.left
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStore
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStoreConfiguration
+import com.tomtom.sdk.datamanagement.nds.NdsStore
+import com.tomtom.sdk.datamanagement.nds.NdsStoreAccessPermit
+import com.tomtom.sdk.datamanagement.nds.NdsStoreConfiguration
+import com.tomtom.sdk.datamanagement.nds.NdsStoreFailure
+import com.tomtom.sdk.datamanagement.nds.update.MapOperationType
+import com.tomtom.sdk.datamanagement.nds.update.MapUpdateError
+import com.tomtom.sdk.datamanagement.nds.update.NdsStoreUpdater
+import com.tomtom.sdk.datamanagement.nds.update.NdsStoreUpdaterConfiguration
+import com.tomtom.sdk.datamanagement.nds.update.compositeregion.CompositeRegionGraph
+import com.tomtom.sdk.datamanagement.nds.update.compositeregion.CompositeRegionId
+import com.tomtom.sdk.datamanagement.nds.update.compositeregion.CompositeRegionListener
+import com.tomtom.sdk.datamanagement.nds.update.compositeregion.CompositeRegionOperation
+import com.tomtom.sdk.datamanagement.nds.update.compositeregion.CompositeRegionStatesData
+import com.tomtom.sdk.datamanagement.nds.update.compositeregion.CompositeRegionsUpdater
+import com.tomtom.sdk.logging.configuration.LoggingConfigurator
 import com.tomtom.sdk.map.display.MapOptions
+import com.tomtom.sdk.map.display.TomTomMapConfig
+import com.tomtom.sdk.map.display.dataprovider.offline.TileOfflineDataProviderFactory
+import com.tomtom.sdk.map.display.style.StandardStyles
 import com.tomtom.sdk.map.display.ui.MapFragment
 import com.tomtom.sdk.map.display.ui.currentlocation.CurrentLocationButton
 import com.tomtom.sdk.navigation.UnitSystemType
@@ -47,8 +66,11 @@ import com.tomtom.sdk.routing.RoutePlanner
 import com.tomtom.sdk.routing.online.OnlineRoutePlanner
 import com.tomtom.sdk.search.Search
 import com.tomtom.sdk.search.online.OnlineSearch
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 import java.util.Locale
 
 
@@ -81,8 +103,80 @@ class MainActivity : AppCompatActivity() {
 
     private val mapContainerId = View.generateViewId()
 
+    private val ndsStore: Result<NdsStore, NdsStoreFailure> by lazy {
+        NdsStore.create(this, NdsStoreConfiguration(
+            ndsStorePath = File("/sdcard/Android/data/com.example.tommymap/files/DATA"),
+            keystorePath = File("/sdcard/Android/data/com.example.tommymap/files/keystore.sqlite"),
+            accessPermit = NdsStoreAccessPermit.KeystorePassword("dL8Oe.5pi9dk4-"),
+//            geopoliticalView = "CHN"
+        ))
+    }
+    private lateinit var compositeRegionsUpdater: CompositeRegionsUpdater
+
     private val mapFragment: MapFragment by lazy {
-        MapFragment.newInstance(MapOptions(BuildConfig.TOMTOM_API_KEY))
+        TomTomMapConfig.customDataProvidersFactoryFunction = {
+            listOf(
+                TileOfflineDataProviderFactory.createOfflineDataProvider(ndsStore.value())
+                // TileHybridDataProviderFactory.createHybridDataProvider(ndsStore.value(), this, false)
+            )
+        }
+        MapFragment.newInstance(MapOptions(
+            mapKey = BuildConfig.TOMTOM_API_KEY,
+            mapStyle = StandardStyles.BROWSING
+        ))
+    }
+
+    private var downloading = false
+
+    private fun printRegionList() {
+        val path = File("/sdcard/Android/data/com.example.tommymap/files")
+        val ndsStoreUpdater = NdsStoreUpdater.create(
+            context = this, ndsStore = ndsStore.value(), configuration = NdsStoreUpdaterConfiguration(
+                updateStoragePath = path.resolve("updates"),
+                persistentStoragePath = path.resolve("mapUpdatePersistence"),
+                locale = Locale.forLanguageTag("ms-MY"),
+                updateServerApiKey = BuildConfig.TOMTOM_API_KEY
+            )
+        )
+        val id2name = mutableMapOf<CompositeRegionId, String>()
+        ndsStoreUpdater.value().setUpdatesEnabled(true)
+        compositeRegionsUpdater = CompositeRegionsUpdater(ndsStoreUpdater.value())
+        compositeRegionsUpdater.addCompositeRegionListener(object : CompositeRegionListener {
+            override fun onCompositeRegionGraphChanged(
+                graphResult: Result<CompositeRegionGraph, MapUpdateError>,
+                changedStates: CompositeRegionStatesData?
+            ) {
+                graphResult.value().roots.forEach { region ->
+                    id2name[region.id] = region.name
+                    region.children?.forEach {
+                        id2name[it.id] = it.name
+                        it.children?.forEach {
+                            id2name[it.id] = it.name
+                        }
+                    }
+                    Log.d(
+                        "Region",
+                        "${region.name} [${region.id}]: " +
+                            region.children?.joinToString(" | ") { "${it.name} [${it.id}]" },
+                    )
+                    if (!downloading) {
+                        Log.d("Region", "Start downloading")
+                        region.children?.find { it.id.toString() == "CompositeRegionId(value='423')" }
+                            ?.let {
+                                compositeRegionsUpdater.scheduleMapOperations(listOf(CompositeRegionOperation(it.id, MapOperationType.InstallAndUpdate)))
+                            }
+                        downloading = true
+                    }
+                }
+            }
+
+            override fun onCompositeRegionStatesChanged(changedStates: CompositeRegionStatesData) {
+                Log.d("Region", "onCompositeRegionStatesChanged")
+                changedStates.stateMap.forEach { regionId, regionState ->
+                    Log.d("RegionX", "$regionId ${id2name.getOrDefault(regionId, "unknown")}: $regionState")
+                }
+            }
+        })
     }
 
     private val navigationFragment: NavigationFragment by lazy {
@@ -122,6 +216,8 @@ class MainActivity : AppCompatActivity() {
 
         requestLocationPermission()
         configureViewModel()
+
+        printRegionList()
     }
 
     override fun onDestroy() {

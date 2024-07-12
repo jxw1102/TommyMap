@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.tommymap"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -57,7 +57,33 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+    }
+}
+
 dependencies {
+    val tom2Version = "1.24.4"
+    implementation("com.tomtom.sdk.maps:map-display:$tom2Version")
+    implementation("com.tomtom.sdk.logging:configuration-android:${tom2Version}")
+    implementation("com.tomtom.sdk.location:provider-android:$tom2Version")
+    implementation("com.tomtom.sdk.location:provider-simulation:$tom2Version")
+    implementation("com.tomtom.sdk.location:provider-map-matched:$tom2Version")
+    implementation("com.tomtom.sdk.search:search-online:$tom2Version")
+    implementation("com.tomtom.sdk.search:search-offline:$tom2Version")
+    implementation("com.tomtom.sdk.routing:route-planner-online:$tom2Version")
+    implementation("com.tomtom.sdk.routing:route-planner-hybrid:${tom2Version}")
+    implementation("com.tomtom.sdk.routing:route-planner-offline:${tom2Version}")
+    implementation("com.tomtom.sdk.navigation:route-replanner-online:$tom2Version")
+    implementation("com.tomtom.sdk.navigation:navigation-online:$tom2Version")
+    implementation("com.tomtom.sdk.navigation:ui:$tom2Version")
+    implementation("com.tomtom.sdk.datamanagement:nds-store:$tom2Version")
+    implementation("com.tomtom.sdk.datamanagement:nds-store-updater:$tom2Version")
+    implementation("com.tomtom.sdk.maps:style-provider-offline:$tom2Version")
+    implementation("com.tomtom.sdk.maps:data-provider-offline:$tom2Version")
+    implementation("com.tomtom.sdk.maps:hybrid-data-provider:$tom2Version")
+    implementation("com.tomtom.sdk.maps.visualization:navigation:${tom2Version}")
+    implementation("com.tomtom.sdk.maps.visualization:range:${tom2Version}")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -83,15 +109,4 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    val tom2Version = "0.48.0"
-    implementation("com.tomtom.sdk.maps:map-display:$tom2Version")
-    implementation("com.tomtom.sdk.location:provider-android:$tom2Version")
-    implementation("com.tomtom.sdk.location:provider-simulation:$tom2Version")
-    implementation("com.tomtom.sdk.location:provider-map-matched:$tom2Version")
-    implementation("com.tomtom.sdk.search:search-online:$tom2Version")
-    implementation("com.tomtom.sdk.routing:route-planner-online:$tom2Version")
-    implementation("com.tomtom.sdk.navigation:navigation-online:$tom2Version")
-    implementation("com.tomtom.sdk.navigation:route-replanner-online:$tom2Version")
-    implementation("com.tomtom.sdk.navigation:ui:$tom2Version")
 }

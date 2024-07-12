@@ -12,7 +12,11 @@ import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.location.OnLocationUpdateListener
 import com.tomtom.sdk.map.display.TomTomMap
+import com.tomtom.sdk.map.display.annotation.ExperimentalCameraApi
+import com.tomtom.sdk.map.display.camera.CameraChangeListener
 import com.tomtom.sdk.map.display.camera.CameraOptions
+import com.tomtom.sdk.map.display.camera.CameraPosition
+import com.tomtom.sdk.map.display.camera.CameraPropertiesChangeListener
 import com.tomtom.sdk.map.display.camera.CameraTrackingMode
 import com.tomtom.sdk.map.display.common.screen.Padding
 import com.tomtom.sdk.map.display.image.ImageFactory
@@ -29,6 +33,7 @@ import com.tomtom.sdk.navigation.RouteAddedListener
 import com.tomtom.sdk.navigation.RouteAddedReason
 import com.tomtom.sdk.navigation.RoutePlan
 import com.tomtom.sdk.navigation.RouteRemovedListener
+import com.tomtom.sdk.navigation.RouteUpdatedReason
 import com.tomtom.sdk.navigation.TomTomNavigation
 import com.tomtom.sdk.navigation.guidance.GuidanceAnnouncement
 import com.tomtom.sdk.navigation.guidance.InstructionPhase
@@ -155,6 +160,7 @@ class MainViewModel(
         listenToCurrentPosition()
         listenToDestination()
         tomTomMap.addRouteClickListener(routeClickListener)
+        tomTomMap.setFrameRate(40)
     }
 
     fun startNavigation() {
@@ -167,6 +173,9 @@ class MainViewModel(
         tomTomNavigation.addActiveRouteChangedListener(activeRouteChangedListener)
         tomTomNavigation.addDestinationArrivalListener(destinationArrivalListener)
         tomTomNavigation.addGuidanceUpdatedListener(guidanceUpdatedListener)
+        tomTomNavigation.addRouteUpdatedListener { route: Route, reason: RouteUpdatedReason ->
+            Log.i("onRouteUpdated", "${route.id} $reason")
+        }
     }
 
     fun onNavigationStarted(bottomPadding: Int) {
@@ -203,7 +212,6 @@ class MainViewModel(
                 locationProvider.addOnLocationUpdateListener(object : OnLocationUpdateListener {
                     override fun onLocationUpdate(location: GeoLocation) {
                         moveMapCamera(location.position)
-                        locationProvider.removeOnLocationUpdateListener(this)
                     }
                 })
             }

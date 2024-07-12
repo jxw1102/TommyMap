@@ -1,16 +1,26 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    val artifactoryUser: String by extra
+    val artifactoryToken: String by extra
+
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
+        mavenLocal()
         google()
         mavenCentral()
         maven {
+            credentials {
+                username = artifactoryUser
+                password = artifactoryToken
+            }
             url = uri("https://repositories.tomtom.com/artifactory/maven")
         }
     }
