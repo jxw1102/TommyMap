@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.tomtom.sdk.extension") version "0.0.1"
 }
 
 val tomtomApiKey: String by project
