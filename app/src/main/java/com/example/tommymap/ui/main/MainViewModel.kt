@@ -21,6 +21,7 @@ import com.tomtom.sdk.map.display.marker.MarkerOptions
 import com.tomtom.sdk.map.display.route.Instruction
 import com.tomtom.sdk.map.display.route.RouteClickListener
 import com.tomtom.sdk.map.display.route.RouteOptions
+import com.tomtom.sdk.map.display.style.StyleMode
 import com.tomtom.sdk.navigation.ActiveRouteChangedListener
 import com.tomtom.sdk.navigation.DestinationArrivalListener
 import com.tomtom.sdk.navigation.GuidanceUpdatedListener
@@ -287,6 +288,12 @@ class MainViewModel(
         if (withZoom) {
             tomTomMap.zoomToRoutes(100)
         }
+    }
+
+    var isDarkStyle = false
+    fun toggleMapStyle() {
+        isDarkStyle = !isDarkStyle
+        tomTomMap.setStyleMode(StyleMode.DARK.takeIf { isDarkStyle } ?: StyleMode.MAIN)
     }
 
     class Factory(

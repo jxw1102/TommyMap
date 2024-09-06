@@ -120,6 +120,21 @@ class MainActivity : AppCompatActivity() {
         frameLayout.addView(setupSearchView())
         frameLayout.addView(setupSimulationButton())
 
+        val styleButton = Button(this)
+        styleButton.text = "Toggle Style"
+        styleButton.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.BOTTOM or Gravity.END
+            rightMargin = dp2px(20)
+            bottomMargin = dp2px(70)
+        }
+        frameLayout.addView(styleButton)
+        styleButton.setOnClickListener {
+            mainViewModel.toggleMapStyle()
+        }
+
         requestLocationPermission()
         configureViewModel()
     }
