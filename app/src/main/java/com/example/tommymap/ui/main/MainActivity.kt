@@ -15,8 +15,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import androidx.core.view.get
-import androidx.core.view.setMargins
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -33,6 +31,7 @@ import com.example.tommymap.dp2px
 import com.example.tommymap.isLocationPermissionGranted
 import com.example.tommymap.ui.search.SearchViewModel
 import com.example.tommymap.ui.search.TommySearchView
+import com.google.android.material.snackbar.Snackbar
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStore
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStoreConfiguration
 import com.tomtom.sdk.map.display.MapOptions
@@ -47,6 +46,7 @@ import com.tomtom.sdk.routing.RoutePlanner
 import com.tomtom.sdk.routing.online.OnlineRoutePlanner
 import com.tomtom.sdk.search.Search
 import com.tomtom.sdk.search.online.OnlineSearch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -289,6 +289,13 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.announcementMessage.collect {
                 if (it.isNotEmpty()) {
                     Toast.makeText(this@MainActivity, it, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        lifecycleScope.launch {
+            mainViewModel.incidentMessage.collect {
+                if (it.isNotEmpty()) {
+                    Snackbar.make(findViewById(mapContainerId), it, Snackbar.LENGTH_LONG).show()
                 }
             }
         }

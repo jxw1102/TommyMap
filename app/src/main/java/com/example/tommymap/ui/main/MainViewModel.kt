@@ -52,10 +52,12 @@ class MainViewModel(
     private val _navigationStarted = MutableStateFlow(false)
     private val _destinationArrived = MutableStateFlow(false)
     private val _announcementMessage = MutableStateFlow("")
+    private val _incidentMessage = MutableStateFlow("")
 
     val navigationStarted: StateFlow<Boolean> = _navigationStarted
     val destinationArrived: StateFlow<Boolean> = _destinationArrived
     val announcementMessage: StateFlow<String> = _announcementMessage
+    val incidentMessage: StateFlow<String> = _incidentMessage
 
     private lateinit var tomTomMap: TomTomMap
 
@@ -155,6 +157,7 @@ class MainViewModel(
         this.tomTomMap = tomTomMap
         listenToCurrentPosition()
         listenToDestination()
+        listenToIncidents()
         tomTomMap.addRouteClickListener(routeClickListener)
     }
 
@@ -204,7 +207,7 @@ class MainViewModel(
                 locationProvider.addOnLocationUpdateListener(object : OnLocationUpdateListener {
                     override fun onLocationUpdate(location: GeoLocation) {
                         moveMapCamera(location.position)
-                        locationProvider.removeOnLocationUpdateListener(this)
+//                        locationProvider.removeOnLocationUpdateListener(this)
                     }
                 })
             }
@@ -230,6 +233,13 @@ class MainViewModel(
                     }
                 }
             }
+        }
+    }
+
+    private fun listenToIncidents() {
+        tomTomMap.showTrafficIncidents()
+        tomTomMap.addTrafficIncidentClickListener { incidents, geoPoint ->
+            _incidentMessage.value = incidents.first().descriptions.first().cause
         }
     }
 
