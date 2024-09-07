@@ -1,13 +1,16 @@
 package com.example.tommymap.ui.main
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.tommymap.BuildConfig
 import com.example.tommymap.R
 import com.example.tommymap.data.NavigationRepository
 import com.example.tommymap.data.TommyLocationProvider
 import com.tomtom.quantity.Distance
+import com.tomtom.sdk.extension.library.IncidentDetailApi
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.location.OnLocationUpdateListener
@@ -21,6 +24,9 @@ import com.tomtom.sdk.map.display.marker.MarkerOptions
 import com.tomtom.sdk.map.display.route.Instruction
 import com.tomtom.sdk.map.display.route.RouteClickListener
 import com.tomtom.sdk.map.display.route.RouteOptions
+import com.tomtom.sdk.map.display.style.LoadingStyleFailure
+import com.tomtom.sdk.map.display.style.StyleDescriptor
+import com.tomtom.sdk.map.display.style.StyleLoadingCallback
 import com.tomtom.sdk.map.display.style.StyleMode
 import com.tomtom.sdk.navigation.ActiveRouteChangedListener
 import com.tomtom.sdk.navigation.DestinationArrivalListener
@@ -39,6 +45,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainViewModel(
     private val locationProvider: TommyLocationProvider,
@@ -144,6 +151,16 @@ class MainViewModel(
         }
     }
 
+    private val styleLoadingCallback = object : StyleLoadingCallback {
+        override fun onFailure(failure: LoadingStyleFailure) {
+            Log.d("Style", "load style failure ${failure.message}")
+        }
+
+        override fun onSuccess() {
+            Log.d("Style", "load style success")
+        }
+    }
+
     override fun onCleared() {
         tomTomMap.setLocationProvider(null)
         super.onCleared()
@@ -155,6 +172,12 @@ class MainViewModel(
 
     fun setupMap(tomTomMap: TomTomMap) {
         this.tomTomMap = tomTomMap
+        tomTomMap.loadStyle(StyleDescriptor(
+            uri = Uri.parse("asset://styles/light/style-browsing.json"),
+            darkUri = Uri.parse("asset://styles/dark/style-browsing.json"),
+            layerMappingUri = Uri.parse("asset://styles/onboard_layer_mapping.json"),
+            darkLayerMappingUri = Uri.parse("asset://styles/onboard_layer_mapping.json"),
+        ), styleLoadingCallback)
         listenToCurrentPosition()
         listenToDestination()
         listenToIncidents()
@@ -236,10 +259,16 @@ class MainViewModel(
         }
     }
 
+    private val incidentDetailApi = IncidentDetailApi()
+
     private fun listenToIncidents() {
         tomTomMap.showTrafficIncidents()
-        tomTomMap.addTrafficIncidentClickListener { incidents, geoPoint ->
-            _incidentMessage.value = incidents.first().descriptions.first().cause
+        tomTomMap.addTrafficIncidentClickListener { incidents, _ ->
+//            _incidentMessage.value = incidents.map { it.descriptions.first().cause }.distinct().joinToString("\n")
+            viewModelScope.launch {
+                val response = incidentDetailApi.getIncidentDetail(incidents.map { it.id!! }, "zh-TW", BuildConfig.TOMTOM_API_KEY)
+                _incidentMessage.value = response.incidents.map { it.properties.events.first().description }.distinct().joinToString("\n")
+            }
         }
     }
 
@@ -248,7 +277,7 @@ class MainViewModel(
             tomTomMap.moveCamera(
                 CameraOptions(
                     position = it,
-                    zoom = 10.0,
+                    zoom = 14.0,
                     tilt = 0.0
                 )
             )

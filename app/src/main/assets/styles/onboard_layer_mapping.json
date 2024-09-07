@@ -1,0 +1,52 @@
+{
+  "mixed": [
+    {
+      "secondary-layer": "skybox-schematic",
+      "before-primary-layer": "background"
+    },
+    {
+      "secondary-layer": "skybox",
+      "before-primary-layer": "background"
+    },
+    {
+      "secondary-layer": "position-marker",
+      "after-primary-layer": "Places - Country name"
+    },
+    {
+      "secondary-layer": "marker",
+      "after-primary-layer": "Places - Country name"
+    },
+    {
+      "secondary-layer": "route-marker",
+      "after-primary-layer": "Places - Country name"
+    },
+    {
+      "secondary-layer": "polyline-shape",
+      "after-primary-layer": "Places - Country name"
+    },
+    {
+      "secondary-layer": "polygon-shape",
+      "after-primary-layer": "Places - Country name"
+    },
+    {
+      "secondary-layer": "circle-shape",
+      "after-primary-layer": "Places - Country name"
+    },
+    {
+      "secondary-layer": "lanegroup-shape",
+      "after-primary-layer": "Borders - Treaty label"
+    },
+    {
+      "secondary-layer": "route",
+      "after-primary-layer": "Borders - Treaty label"
+    },
+    {
+      "secondary-layer": "route-instruction",
+      "before-primary-layer": "3D - Building"
+    },
+    {
+      "secondary-layer": "polar-cap",
+      "after-primary-layer": "Water - Fill"
+    }
+  ]
+}

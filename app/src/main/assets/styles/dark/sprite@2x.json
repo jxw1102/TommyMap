@@ -1,0 +1,5273 @@
+{
+    "tt_restriction_adr_category_EU_yellow_15": {
+        "width": 222,
+        "height": 144,
+        "x": 0,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_toxic_and_infectious_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 222,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_solids_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 430,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 430,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_car_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 416,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_liquids_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 416,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 638,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 638,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 430,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_explosives_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 638,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_bus_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 638,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_truck_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 416,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 624,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_oxidizing_and_organic_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 846,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_waterpollutants_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_truck_15": {
+        "width": 208,
+        "height": 144,
+        "x": 846,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 846,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 846,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_nodangerousgoods_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_miscellaneous_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 846,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_radioactive_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 416,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 624,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 832,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_gases_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 208,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 416,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 624,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_bus_15": {
+        "width": 208,
+        "height": 144,
+        "x": 832,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 1054,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 832,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_15": {
+        "width": 208,
+        "height": 144,
+        "x": 1054,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 846,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_dangerousgoods_shield_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 0,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_truck_15": {
+        "width": 208,
+        "height": 144,
+        "x": 624,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_bus_15": {
+        "width": 208,
+        "height": 144,
+        "x": 1054,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_car_15": {
+        "width": 208,
+        "height": 144,
+        "x": 832,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_car_15": {
+        "width": 208,
+        "height": 144,
+        "x": 1054,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_yellow_15": {
+        "width": 208,
+        "height": 144,
+        "x": 1054,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_corrosives_US_15": {
+        "width": 208,
+        "height": 144,
+        "x": 1054,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_US_15": {
+        "width": 208,
+        "height": 128,
+        "x": 1054,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_EU_white_11": {
+        "width": 172,
+        "height": 144,
+        "x": 1054,
+        "y": 704,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_EU_yellow_11": {
+        "width": 172,
+        "height": 144,
+        "x": 1054,
+        "y": 848,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_truck_11": {
+        "width": 160,
+        "height": 144,
+        "x": 0,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 160,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 320,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 480,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 640,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 800,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 960,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_gases_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_bus_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_radioactive_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_oxidizing_and_organic_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 0,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 160,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 320,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 480,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_miscellaneous_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 640,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_waterpollutants_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_nodangerousgoods_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 800,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 960,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1120,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_car_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_liquids_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_bus_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_corrosives_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_bus_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_explosives_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 0,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_car_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 160,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_dangerousgoods_shield_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_truck_11": {
+        "width": 160,
+        "height": 144,
+        "x": 320,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_car_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1262,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 320,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_solids_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 480,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_toxic_and_infectious_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 640,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 800,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_11": {
+        "width": 160,
+        "height": 144,
+        "x": 1422,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_truck_11": {
+        "width": 160,
+        "height": 144,
+        "x": 160,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_white_11": {
+        "width": 160,
+        "height": 144,
+        "x": 960,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_US_11": {
+        "width": 160,
+        "height": 144,
+        "x": 0,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_EU_white_8": {
+        "width": 144,
+        "height": 144,
+        "x": 1120,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_EU_yellow_8": {
+        "width": 144,
+        "height": 144,
+        "x": 1264,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_US_11": {
+        "width": 160,
+        "height": 128,
+        "x": 1408,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1120,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_waterpollutants_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_radioactive_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_toxic_and_infectious_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_nodangerousgoods_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_dangerousgoods_shield_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_car_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 0,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 128,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_explosives_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 256,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 384,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_bus_8": {
+        "width": 128,
+        "height": 144,
+        "x": 512,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 512,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_corrosives_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 640,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_truck_8": {
+        "width": 128,
+        "height": 144,
+        "x": 768,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_oxidizing_and_organic_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 896,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_bus_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1024,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1582,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_truck_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1152,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_car_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 768,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_bus_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1280,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1152,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1408,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1536,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_truck_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1024,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_miscellaneous_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 432,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 720,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_gases_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 1296,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 1710,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_solids_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 0,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 128,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_car_8": {
+        "width": 128,
+        "height": 144,
+        "x": 512,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_white_8": {
+        "width": 128,
+        "height": 144,
+        "x": 128,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_yellow_8": {
+        "width": 128,
+        "height": 144,
+        "x": 384,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_liquids_US_8": {
+        "width": 128,
+        "height": 144,
+        "x": 256,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_US_8": {
+        "width": 128,
+        "height": 128,
+        "x": 384,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_EU_white": {
+        "width": 96,
+        "height": 144,
+        "x": 1838,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_EU_yellow": {
+        "width": 96,
+        "height": 144,
+        "x": 1838,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_solids_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 480,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 672,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 768,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_flammable_liquids_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "tt_restriction_speed_limit_eu_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_car": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 960,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_bus": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 960,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_explosives_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1056,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 960,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_truck": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_car": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1248,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_corrosives_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1344,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow_bus": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1248,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1248,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_truck": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1536,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_car": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1632,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white_bus": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1632,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1632,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "tt_restriction_adr_category_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_noaccess_US_truck": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1536,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_explosive_materials_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 512,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 608,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_dangerousgoods_shield_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 704,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_general_hazardous_materials_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 800,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_toxic_and_infectious_US": {
+        "width": 96,
+        "height": 96,
+        "x": 896,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_goods_harmful_to_water_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_nodangerousgoods_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 992,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_radioactive_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1088,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1184,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_flow_notrucks_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1280,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_oxidizing_and_organic_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1376,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 1472,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_height_US": {
+        "width": 96,
+        "height": 96,
+        "x": 1568,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1664,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_miscellaneous_US": {
+        "width": 96,
+        "height": 96,
+        "x": 0,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 96,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 192,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_EU_yellow": {
+        "width": 96,
+        "height": 96,
+        "x": 288,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "tt_restriction_hazmat_class_gases_US": {
+        "width": 96,
+        "height": 96,
+        "x": 384,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_EU_white": {
+        "width": 96,
+        "height": 96,
+        "x": 1838,
+        "y": 768,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_weather_wind": {
+        "width": 88,
+        "height": 96,
+        "x": 480,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_weather_frost": {
+        "width": 88,
+        "height": 96,
+        "x": 568,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_weather_frost": {
+        "width": 88,
+        "height": 96,
+        "x": 656,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_weather_rain": {
+        "width": 88,
+        "height": 96,
+        "x": 744,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_weather_wind": {
+        "width": 88,
+        "height": 96,
+        "x": 832,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_road_closed": {
+        "width": 88,
+        "height": 96,
+        "x": 920,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_accident": {
+        "width": 88,
+        "height": 96,
+        "x": 1008,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_bg_base": {
+        "width": 88,
+        "height": 96,
+        "x": 1096,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_danger": {
+        "width": 88,
+        "height": 96,
+        "x": 1184,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_flooding": {
+        "width": 88,
+        "height": 96,
+        "x": 1272,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_info": {
+        "width": 88,
+        "height": 96,
+        "x": 1360,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_jam": {
+        "width": 88,
+        "height": 96,
+        "x": 1448,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_lane_closed": {
+        "width": 88,
+        "height": 96,
+        "x": 1536,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_roadworks": {
+        "width": 88,
+        "height": 96,
+        "x": 1624,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_stationary_vehicle": {
+        "width": 88,
+        "height": 96,
+        "x": 1712,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "traffic_slow_weather_fog": {
+        "width": 88,
+        "height": 96,
+        "x": 1800,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_axleweight_US": {
+        "width": 88,
+        "height": 96,
+        "x": 0,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_slow_weather_rain": {
+        "width": 88,
+        "height": 96,
+        "x": 88,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_slow_weather_wind": {
+        "width": 88,
+        "height": 96,
+        "x": 176,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_accident": {
+        "width": 88,
+        "height": 96,
+        "x": 264,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_bg_base": {
+        "width": 88,
+        "height": 96,
+        "x": 352,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_danger": {
+        "width": 88,
+        "height": 96,
+        "x": 440,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_flooding": {
+        "width": 88,
+        "height": 96,
+        "x": 528,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_info": {
+        "width": 88,
+        "height": 96,
+        "x": 616,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_jam": {
+        "width": 88,
+        "height": 96,
+        "x": 704,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_lane_closed": {
+        "width": 88,
+        "height": 96,
+        "x": 792,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_roadworks": {
+        "width": 88,
+        "height": 96,
+        "x": 880,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_stationary_vehicle": {
+        "width": 88,
+        "height": 96,
+        "x": 968,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_weather_fog": {
+        "width": 88,
+        "height": 96,
+        "x": 1056,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_weather_frost": {
+        "width": 88,
+        "height": 96,
+        "x": 1144,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_stationary_weather_rain": {
+        "width": 88,
+        "height": 96,
+        "x": 1232,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_stationary_vehicle": {
+        "width": 88,
+        "height": 96,
+        "x": 1320,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_length_US": {
+        "width": 88,
+        "height": 96,
+        "x": 1408,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_weather_fog": {
+        "width": 88,
+        "height": 96,
+        "x": 1496,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_weight_US": {
+        "width": 88,
+        "height": 96,
+        "x": 1584,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_width_US": {
+        "width": 88,
+        "height": 96,
+        "x": 1672,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_accident": {
+        "width": 88,
+        "height": 96,
+        "x": 1760,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_danger": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_flooding": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 96,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_info": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 192,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_jam": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_lane_closed": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 384,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_roadworks": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 480,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_stationary_vehicle": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 576,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_weather_frost": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 672,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_weather_rain": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 768,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_weather_wind": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 864,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_accident": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 960,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_bg_base": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1056,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_danger": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1152,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_flooding": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1248,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_info": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1344,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_jam": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_lane_closed": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1536,
+        "pixelRatio": 2
+    },
+    "traffic_no_delay_weather_fog": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1632,
+        "pixelRatio": 2
+    },
+    "traffic_queueing_roadworks": {
+        "width": 88,
+        "height": 96,
+        "x": 1934,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "usa-mibus-6605-4": {
+        "width": 84,
+        "height": 92,
+        "x": 1934,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "road_restriction": {
+        "width": 160,
+        "height": 48,
+        "x": 0,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "road_restriction_period": {
+        "width": 160,
+        "height": 48,
+        "x": 160,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "usa-njbus-7010-4": {
+        "width": 80,
+        "height": 92,
+        "x": 1848,
+        "y": 1824,
+        "pixelRatio": 2
+    },
+    "usa-mobus-6755-4": {
+        "width": 80,
+        "height": 88,
+        "x": 2022,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "tt_restriction_physical_notrailer_US": {
+        "width": 88,
+        "height": 80,
+        "x": 0,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-mibus-6605-3": {
+        "width": 72,
+        "height": 92,
+        "x": 2022,
+        "y": 88,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5415-4": {
+        "width": 72,
+        "height": 92,
+        "x": 2022,
+        "y": 180,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5405-4": {
+        "width": 72,
+        "height": 92,
+        "x": 2022,
+        "y": 272,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5410-4": {
+        "width": 72,
+        "height": 92,
+        "x": 2022,
+        "y": 364,
+        "pixelRatio": 2
+    },
+    "usa-arbus-5660-4": {
+        "width": 74,
+        "height": 84,
+        "x": 2022,
+        "y": 456,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5405-3": {
+        "width": 66,
+        "height": 92,
+        "x": 2022,
+        "y": 540,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5410-3": {
+        "width": 66,
+        "height": 92,
+        "x": 2022,
+        "y": 632,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5415-3": {
+        "width": 66,
+        "height": 92,
+        "x": 2022,
+        "y": 724,
+        "pixelRatio": 2
+    },
+    "usa-highwaybus-5460-4": {
+        "width": 74,
+        "height": 80,
+        "x": 2022,
+        "y": 816,
+        "pixelRatio": 2
+    },
+    "usa-njbus-7010-3": {
+        "width": 64,
+        "height": 92,
+        "x": 2022,
+        "y": 896,
+        "pixelRatio": 2
+    },
+    "default_pin": {
+        "width": 64,
+        "height": 88,
+        "x": 2022,
+        "y": 988,
+        "pixelRatio": 2
+    },
+    "usa-mobus-6755-3": {
+        "width": 64,
+        "height": 88,
+        "x": 2022,
+        "y": 1076,
+        "pixelRatio": 2
+    },
+    "usa-mibus-6605-2": {
+        "width": 60,
+        "height": 92,
+        "x": 2022,
+        "y": 1164,
+        "pixelRatio": 2
+    },
+    "usa-mainebus-6455-4": {
+        "width": 70,
+        "height": 76,
+        "x": 2022,
+        "y": 1256,
+        "pixelRatio": 2
+    },
+    "usa-arbus-5660-3": {
+        "width": 62,
+        "height": 84,
+        "x": 2022,
+        "y": 1332,
+        "pixelRatio": 2
+    },
+    "usa-txbus-7660-4": {
+        "width": 68,
+        "height": 76,
+        "x": 2022,
+        "y": 1416,
+        "pixelRatio": 2
+    },
+    "usa-tx-8300-4": {
+        "width": 78,
+        "height": 64,
+        "x": 2022,
+        "y": 1492,
+        "pixelRatio": 2
+    },
+    "usa-highwaybus-5460-3": {
+        "width": 62,
+        "height": 80,
+        "x": 2022,
+        "y": 1556,
+        "pixelRatio": 2
+    },
+    "special01-white-blue2-4": {
+        "width": 76,
+        "height": 64,
+        "x": 2022,
+        "y": 1636,
+        "pixelRatio": 2
+    },
+    "usa-njbus-7010-2": {
+        "width": 52,
+        "height": 92,
+        "x": 2022,
+        "y": 1700,
+        "pixelRatio": 2
+    },
+    "usa-nm-7050-4": {
+        "width": 84,
+        "height": 56,
+        "x": 88,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-ok-7300-3": {
+        "width": 84,
+        "height": 56,
+        "x": 172,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-id-6100-3": {
+        "width": 68,
+        "height": 68,
+        "x": 2022,
+        "y": 1792,
+        "pixelRatio": 2
+    },
+    "usa-hi-6050-4": {
+        "width": 82,
+        "height": 56,
+        "x": 256,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-mobus-6755-2": {
+        "width": 52,
+        "height": 88,
+        "x": 2022,
+        "y": 1860,
+        "pixelRatio": 2
+    },
+    "usa-mainebus-6455-3": {
+        "width": 60,
+        "height": 76,
+        "x": 1760,
+        "y": 1584,
+        "pixelRatio": 2
+    },
+    "special03-green2-white-6": {
+        "width": 92,
+        "height": 48,
+        "x": 320,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "usa-tx-8300-3": {
+        "width": 68,
+        "height": 64,
+        "x": 2102,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "usa-tx-8303-3": {
+        "width": 68,
+        "height": 64,
+        "x": 2102,
+        "y": 64,
+        "pixelRatio": 2
+    },
+    "usa-tn-7610-3": {
+        "width": 72,
+        "height": 60,
+        "x": 0,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-txbus-7660-3": {
+        "width": 56,
+        "height": 76,
+        "x": 2102,
+        "y": 128,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5415-2": {
+        "width": 46,
+        "height": 92,
+        "x": 2102,
+        "y": 204,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5410-2": {
+        "width": 46,
+        "height": 92,
+        "x": 2102,
+        "y": 296,
+        "pixelRatio": 2
+    },
+    "usa-interbus-5405-2": {
+        "width": 46,
+        "height": 92,
+        "x": 2102,
+        "y": 388,
+        "pixelRatio": 2
+    },
+    "special01-white-blue2-3": {
+        "width": 64,
+        "height": 64,
+        "x": 2102,
+        "y": 480,
+        "pixelRatio": 2
+    },
+    "india--115-4": {
+        "width": 64,
+        "height": 64,
+        "x": 2102,
+        "y": 544,
+        "pixelRatio": 2
+    },
+    "india--110-4": {
+        "width": 68,
+        "height": 60,
+        "x": 2102,
+        "y": 608,
+        "pixelRatio": 2
+    },
+    "usa-nc-7150-3": {
+        "width": 72,
+        "height": 56,
+        "x": 338,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-nv-6900-3": {
+        "width": 56,
+        "height": 72,
+        "x": 2102,
+        "y": 668,
+        "pixelRatio": 2
+    },
+    "usa-mi-6600-3": {
+        "width": 72,
+        "height": 56,
+        "x": 410,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-arbus-5660-2": {
+        "width": 48,
+        "height": 84,
+        "x": 2102,
+        "y": 740,
+        "pixelRatio": 2
+    },
+    "korea--3300-4": {
+        "width": 72,
+        "height": 56,
+        "x": 482,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "us3-blue2-white-4": {
+        "width": 76,
+        "height": 52,
+        "x": 554,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-id-6100-2": {
+        "width": 58,
+        "height": 68,
+        "x": 2102,
+        "y": 824,
+        "pixelRatio": 2
+    },
+    "usa-fl-5950-4": {
+        "width": 82,
+        "height": 48,
+        "x": 412,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "special03-green2-white-5": {
+        "width": 80,
+        "height": 48,
+        "x": 494,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "us2-white-black-4": {
+        "width": 80,
+        "height": 48,
+        "x": 574,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "usa-pa-7400-3": {
+        "width": 64,
+        "height": 60,
+        "x": 2102,
+        "y": 892,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-white-7": {
+        "width": 106,
+        "height": 36,
+        "x": 654,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-blue3-white-7": {
+        "width": 106,
+        "height": 36,
+        "x": 760,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "usa-nm-7050-3": {
+        "width": 68,
+        "height": 56,
+        "x": 2102,
+        "y": 952,
+        "pixelRatio": 2
+    },
+    "usa-ut-7700-3": {
+        "width": 68,
+        "height": 56,
+        "x": 2102,
+        "y": 1008,
+        "pixelRatio": 2
+    },
+    "canada--1000-3": {
+        "width": 68,
+        "height": 56,
+        "x": 2102,
+        "y": 1064,
+        "pixelRatio": 2
+    },
+    "usa-nh-6950-4": {
+        "width": 76,
+        "height": 50,
+        "x": 630,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-vt-7750-4": {
+        "width": 72,
+        "height": 52,
+        "x": 72,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-la-6400-4": {
+        "width": 72,
+        "height": 52,
+        "x": 144,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-nd-7200-4": {
+        "width": 72,
+        "height": 52,
+        "x": 216,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "diamond-green3-white-3": {
+        "width": 72,
+        "height": 52,
+        "x": 288,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "shield01-blue2-white-4": {
+        "width": 72,
+        "height": 52,
+        "x": 360,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-wa-7850-3": {
+        "width": 62,
+        "height": 60,
+        "x": 2102,
+        "y": 1120,
+        "pixelRatio": 2
+    },
+    "saudiarabia--4760-3": {
+        "width": 58,
+        "height": 64,
+        "x": 2102,
+        "y": 1180,
+        "pixelRatio": 2
+    },
+    "usa-tx-8300-2": {
+        "width": 58,
+        "height": 64,
+        "x": 2102,
+        "y": 1244,
+        "pixelRatio": 2
+    },
+    "usa-tx-8303-2": {
+        "width": 58,
+        "height": 64,
+        "x": 2102,
+        "y": 1308,
+        "pixelRatio": 2
+    },
+    "usa-hi-6050-3": {
+        "width": 66,
+        "height": 56,
+        "x": 2102,
+        "y": 1372,
+        "pixelRatio": 2
+    },
+    "usa-highwaybus-5460-2": {
+        "width": 46,
+        "height": 80,
+        "x": 2102,
+        "y": 1428,
+        "pixelRatio": 2
+    },
+    "shield10-red-white-4": {
+        "width": 76,
+        "height": 48,
+        "x": 706,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "shield10-blue2-white-4": {
+        "width": 76,
+        "height": 48,
+        "x": 782,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-va-7800-3": {
+        "width": 60,
+        "height": 60,
+        "x": 2102,
+        "y": 1508,
+        "pixelRatio": 2
+    },
+    "usa-tn-7610-2": {
+        "width": 60,
+        "height": 60,
+        "x": 2102,
+        "y": 1568,
+        "pixelRatio": 2
+    },
+    "canada-pe-1400-3": {
+        "width": 60,
+        "height": 60,
+        "x": 2102,
+        "y": 1628,
+        "pixelRatio": 2
+    },
+    "usa-az-5600-4": {
+        "width": 72,
+        "height": 50,
+        "x": 432,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-ga-6000-4": {
+        "width": 72,
+        "height": 50,
+        "x": 504,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "india--115-3": {
+        "width": 56,
+        "height": 64,
+        "x": 2102,
+        "y": 1688,
+        "pixelRatio": 2
+    },
+    "korea--3300-3": {
+        "width": 64,
+        "height": 56,
+        "x": 2102,
+        "y": 1752,
+        "pixelRatio": 2
+    },
+    "shield09-green3-white-3": {
+        "width": 68,
+        "height": 52,
+        "x": 2102,
+        "y": 1808,
+        "pixelRatio": 2
+    },
+    "us3-blue2-white-3": {
+        "width": 68,
+        "height": 52,
+        "x": 2102,
+        "y": 1860,
+        "pixelRatio": 2
+    },
+    "oval-blue2-white-4": {
+        "width": 88,
+        "height": 40,
+        "x": 858,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "shield12-blue2-white-4": {
+        "width": 80,
+        "height": 44,
+        "x": 576,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "shield06-green2-white-4": {
+        "width": 76,
+        "height": 46,
+        "x": 0,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "shield06-blue2-white-4": {
+        "width": 76,
+        "height": 46,
+        "x": 76,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "canada-bc-1105-3": {
+        "width": 62,
+        "height": 56,
+        "x": 2102,
+        "y": 1912,
+        "pixelRatio": 2
+    },
+    "usa-nv-6900-2": {
+        "width": 48,
+        "height": 72,
+        "x": 2102,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-sd-7550-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "shield05-red-white-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 48,
+        "pixelRatio": 2
+    },
+    "special02-yellow2-green3-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 96,
+        "pixelRatio": 2
+    },
+    "usa-ny-7100-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 144,
+        "pixelRatio": 2
+    },
+    "special02-white-green3-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 192,
+        "pixelRatio": 2
+    },
+    "circle-blue2-white-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 240,
+        "pixelRatio": 2
+    },
+    "usa-ne-6850-3": {
+        "width": 64,
+        "height": 54,
+        "x": 2170,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "circle-green2-white-4": {
+        "width": 72,
+        "height": 48,
+        "x": 2170,
+        "y": 342,
+        "pixelRatio": 2
+    },
+    "usa-county-8200-4": {
+        "width": 74,
+        "height": 46,
+        "x": 152,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "india--110-3": {
+        "width": 56,
+        "height": 60,
+        "x": 2170,
+        "y": 390,
+        "pixelRatio": 2
+    },
+    "canada-sk-1500-3": {
+        "width": 60,
+        "height": 56,
+        "x": 2170,
+        "y": 450,
+        "pixelRatio": 2
+    },
+    "usa-mt-6806-3": {
+        "width": 56,
+        "height": 60,
+        "x": 2170,
+        "y": 506,
+        "pixelRatio": 2
+    },
+    "argentina--360-4": {
+        "width": 60,
+        "height": 56,
+        "x": 2170,
+        "y": 566,
+        "pixelRatio": 2
+    },
+    "pentagon-white-black-4": {
+        "width": 76,
+        "height": 44,
+        "x": 656,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-txbus-7660-2": {
+        "width": 44,
+        "height": 76,
+        "x": 2170,
+        "y": 622,
+        "pixelRatio": 2
+    },
+    "hexagon2-blue2-white-4": {
+        "width": 76,
+        "height": 44,
+        "x": 732,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-co-5750-3": {
+        "width": 52,
+        "height": 64,
+        "x": 2170,
+        "y": 698,
+        "pixelRatio": 2
+    },
+    "usa-nd-7200-3": {
+        "width": 64,
+        "height": 52,
+        "x": 2170,
+        "y": 762,
+        "pixelRatio": 2
+    },
+    "usa-nd-7200-2": {
+        "width": 64,
+        "height": 52,
+        "x": 2170,
+        "y": 814,
+        "pixelRatio": 2
+    },
+    "usa-il-6150-4": {
+        "width": 64,
+        "height": 52,
+        "x": 2170,
+        "y": 866,
+        "pixelRatio": 2
+    },
+    "rectangle-red-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 866,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "hexagon-orange-black-6": {
+        "width": 92,
+        "height": 36,
+        "x": 958,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-green3-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1050,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "hexagon-green2-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1142,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-green2-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1234,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1326,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-blue3-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1418,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-blue1-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1510,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-white-6": {
+        "width": 92,
+        "height": 36,
+        "x": 1602,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "korea--3305-4": {
+        "width": 82,
+        "height": 40,
+        "x": 946,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "special04-green2-white-4": {
+        "width": 68,
+        "height": 48,
+        "x": 2170,
+        "y": 918,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-black-7": {
+        "width": 102,
+        "height": 32,
+        "x": 512,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "special03-green2-white-4": {
+        "width": 68,
+        "height": 48,
+        "x": 2170,
+        "y": 966,
+        "pixelRatio": 2
+    },
+    "rectangle-white-black-7": {
+        "width": 102,
+        "height": 32,
+        "x": 614,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "usa-fl-5950-3": {
+        "width": 68,
+        "height": 48,
+        "x": 2170,
+        "y": 1014,
+        "pixelRatio": 2
+    },
+    "shield07-green3-black-4": {
+        "width": 68,
+        "height": 48,
+        "x": 2170,
+        "y": 1062,
+        "pixelRatio": 2
+    },
+    "canada-on-1600-3": {
+        "width": 58,
+        "height": 56,
+        "x": 2170,
+        "y": 1110,
+        "pixelRatio": 2
+    },
+    "canada-ns-1255-3": {
+        "width": 58,
+        "height": 56,
+        "x": 2170,
+        "y": 1166,
+        "pixelRatio": 2
+    },
+    "usa-ok-7300-2": {
+        "width": 58,
+        "height": 56,
+        "x": 2170,
+        "y": 1222,
+        "pixelRatio": 2
+    },
+    "usa-md-6500-3": {
+        "width": 54,
+        "height": 60,
+        "x": 2170,
+        "y": 1278,
+        "pixelRatio": 2
+    },
+    "canada-ab-1065-2": {
+        "width": 62,
+        "height": 52,
+        "x": 2170,
+        "y": 1338,
+        "pixelRatio": 2
+    },
+    "usa-la-6400-3": {
+        "width": 62,
+        "height": 52,
+        "x": 2170,
+        "y": 1390,
+        "pixelRatio": 2
+    },
+    "oval-blue2-white-3": {
+        "width": 80,
+        "height": 40,
+        "x": 1028,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "usa-or-7350-3": {
+        "width": 64,
+        "height": 50,
+        "x": 2170,
+        "y": 1442,
+        "pixelRatio": 2
+    },
+    "pill-white-black-6": {
+        "width": 100,
+        "height": 32,
+        "x": 716,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "usa-ga-6000-3": {
+        "width": 64,
+        "height": 50,
+        "x": 2170,
+        "y": 1492,
+        "pixelRatio": 2
+    },
+    "usa-mainebus-6455-2": {
+        "width": 42,
+        "height": 76,
+        "x": 2170,
+        "y": 1542,
+        "pixelRatio": 2
+    },
+    "hexagon-yellow2-black-6": {
+        "width": 88,
+        "height": 36,
+        "x": 1694,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "canada-on-1355-3": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1618,
+        "pixelRatio": 2
+    },
+    "usa-ut-7700-2": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1674,
+        "pixelRatio": 2
+    },
+    "usa-nm-7050-2": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1730,
+        "pixelRatio": 2
+    },
+    "usa-mi-6600-2": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1786,
+        "pixelRatio": 2
+    },
+    "argentina--360-3": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1842,
+        "pixelRatio": 2
+    },
+    "usa-nc-7150-2": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1898,
+        "pixelRatio": 2
+    },
+    "usa-dc-5900-3": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 1954,
+        "pixelRatio": 2
+    },
+    "canada--1000-2": {
+        "width": 56,
+        "height": 56,
+        "x": 2170,
+        "y": 2010,
+        "pixelRatio": 2
+    },
+    "usa-pa-7400-2": {
+        "width": 52,
+        "height": 60,
+        "x": 2170,
+        "y": 2066,
+        "pixelRatio": 2
+    },
+    "usa-vt-7750-3": {
+        "width": 60,
+        "height": 52,
+        "x": 0,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "canada-ab-1055-3": {
+        "width": 52,
+        "height": 60,
+        "x": 2242,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "shield01-blue2-white-3": {
+        "width": 60,
+        "height": 52,
+        "x": 60,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "uae--300-3": {
+        "width": 52,
+        "height": 60,
+        "x": 2242,
+        "y": 60,
+        "pixelRatio": 2
+    },
+    "usa-oh-7250-3": {
+        "width": 62,
+        "height": 50,
+        "x": 120,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "circle-green2-white-3": {
+        "width": 64,
+        "height": 48,
+        "x": 182,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "circle-blue2-white-3": {
+        "width": 64,
+        "height": 48,
+        "x": 246,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "shield10-red-white-3": {
+        "width": 64,
+        "height": 48,
+        "x": 310,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "canada-sk-1510-3": {
+        "width": 48,
+        "height": 64,
+        "x": 2242,
+        "y": 120,
+        "pixelRatio": 2
+    },
+    "special01-white-blue2-2": {
+        "width": 48,
+        "height": 64,
+        "x": 2242,
+        "y": 184,
+        "pixelRatio": 2
+    },
+    "shield10-blue2-white-3": {
+        "width": 64,
+        "height": 48,
+        "x": 374,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "shield07-white-black-4": {
+        "width": 64,
+        "height": 48,
+        "x": 438,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-ks-6300-3": {
+        "width": 64,
+        "height": 48,
+        "x": 502,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "pentagon-brown1-white-3": {
+        "width": 64,
+        "height": 48,
+        "x": 566,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "shield07-yellow2-black-4": {
+        "width": 64,
+        "height": 48,
+        "x": 630,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "us2-white-black-3": {
+        "width": 64,
+        "height": 48,
+        "x": 694,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "canada-on-1350-3": {
+        "width": 64,
+        "height": 48,
+        "x": 758,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "korea--3300-2": {
+        "width": 48,
+        "height": 64,
+        "x": 2242,
+        "y": 248,
+        "pixelRatio": 2
+    },
+    "saudiarabia--4760-2": {
+        "width": 48,
+        "height": 64,
+        "x": 2242,
+        "y": 312,
+        "pixelRatio": 2
+    },
+    "usa-mt-6800-4": {
+        "width": 64,
+        "height": 48,
+        "x": 822,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "mexico--3650-4": {
+        "width": 64,
+        "height": 48,
+        "x": 886,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-hi-6050-2": {
+        "width": 54,
+        "height": 56,
+        "x": 0,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-ne-6850-2": {
+        "width": 56,
+        "height": 54,
+        "x": 54,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-ak-5550-2": {
+        "width": 54,
+        "height": 56,
+        "x": 2294,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "usa-mo-6750-3": {
+        "width": 60,
+        "height": 50,
+        "x": 110,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-md-6500-2": {
+        "width": 50,
+        "height": 60,
+        "x": 2294,
+        "y": 56,
+        "pixelRatio": 2
+    },
+    "usa-wa-7850-2": {
+        "width": 50,
+        "height": 60,
+        "x": 2294,
+        "y": 116,
+        "pixelRatio": 2
+    },
+    "usa-nh-6950-3": {
+        "width": 60,
+        "height": 50,
+        "x": 170,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-az-5600-3": {
+        "width": 60,
+        "height": 50,
+        "x": 230,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-ar-5650-3": {
+        "width": 60,
+        "height": 50,
+        "x": 290,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-al-5500-3": {
+        "width": 60,
+        "height": 50,
+        "x": 350,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "hexagon2-blue2-white-3": {
+        "width": 68,
+        "height": 44,
+        "x": 808,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "venezuela--961-4": {
+        "width": 68,
+        "height": 44,
+        "x": 876,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "shield03-green2-white-4": {
+        "width": 68,
+        "height": 44,
+        "x": 944,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "shield03-blue2-white-4": {
+        "width": 68,
+        "height": 44,
+        "x": 1012,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-mn-6650-2": {
+        "width": 56,
+        "height": 52,
+        "x": 0,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "usa-dc-5900-2": {
+        "width": 52,
+        "height": 56,
+        "x": 2294,
+        "y": 176,
+        "pixelRatio": 2
+    },
+    "usa-mn-6650-3": {
+        "width": 56,
+        "height": 52,
+        "x": 56,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "canada-nb-1200-2": {
+        "width": 52,
+        "height": 56,
+        "x": 2294,
+        "y": 232,
+        "pixelRatio": 2
+    },
+    "canada-mb-1150-3": {
+        "width": 52,
+        "height": 56,
+        "x": 2294,
+        "y": 288,
+        "pixelRatio": 2
+    },
+    "usa-tx-7650-3": {
+        "width": 52,
+        "height": 56,
+        "x": 2294,
+        "y": 344,
+        "pixelRatio": 2
+    },
+    "canada-ab-1050-3": {
+        "width": 52,
+        "height": 56,
+        "x": 2294,
+        "y": 400,
+        "pixelRatio": 2
+    },
+    "shield07-green3-black-3": {
+        "width": 60,
+        "height": 48,
+        "x": 950,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "shield05-red-white-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1010,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "rectangle-blue3-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1782,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-red-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1862,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "hexagon-yellow2-black-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1942,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "rectangle-blue1-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1108,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1188,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "hexagon-orange-black-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1268,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-green3-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1348,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-green2-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1428,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1508,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "hexagon-green2-white-5": {
+        "width": 80,
+        "height": 36,
+        "x": 1588,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "special03-green2-white-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1070,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-va-7800-2": {
+        "width": 48,
+        "height": 60,
+        "x": 2294,
+        "y": 456,
+        "pixelRatio": 2
+    },
+    "usa-highway-5450-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1130,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "special04-green2-white-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1190,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-sd-7550-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1250,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "special02-white-green3-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1310,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "special02-yellow2-green3-3": {
+        "width": 60,
+        "height": 48,
+        "x": 1370,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-county-8200-3": {
+        "width": 62,
+        "height": 46,
+        "x": 226,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "shield02-white-black-4": {
+        "width": 64,
+        "height": 44,
+        "x": 1080,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "pill-white-black-5": {
+        "width": 88,
+        "height": 32,
+        "x": 816,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "shield12-blue2-white-3": {
+        "width": 64,
+        "height": 44,
+        "x": 1144,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-black-6": {
+        "width": 88,
+        "height": 32,
+        "x": 904,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "india--115-2": {
+        "width": 44,
+        "height": 64,
+        "x": 2294,
+        "y": 516,
+        "pixelRatio": 2
+    },
+    "rectangle-white-black-6": {
+        "width": 88,
+        "height": 32,
+        "x": 992,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-orange-black-6": {
+        "width": 88,
+        "height": 32,
+        "x": 1080,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "canada-on-1600-2": {
+        "width": 50,
+        "height": 56,
+        "x": 2294,
+        "y": 580,
+        "pixelRatio": 2
+    },
+    "usa-ga-6000-2": {
+        "width": 56,
+        "height": 50,
+        "x": 410,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "canada-ab-1040-2": {
+        "width": 50,
+        "height": 56,
+        "x": 2294,
+        "y": 636,
+        "pixelRatio": 2
+    },
+    "shield06-blue2-white-3": {
+        "width": 60,
+        "height": 46,
+        "x": 288,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "shield06-green2-white-3": {
+        "width": 60,
+        "height": 46,
+        "x": 348,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "canada-pe-1400-2": {
+        "width": 46,
+        "height": 60,
+        "x": 2294,
+        "y": 692,
+        "pixelRatio": 2
+    },
+    "us1-white-black-4": {
+        "width": 68,
+        "height": 40,
+        "x": 1208,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "octagon-green2-white-4": {
+        "width": 68,
+        "height": 40,
+        "x": 1276,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "hexagon-green3-yellow2-4": {
+        "width": 68,
+        "height": 40,
+        "x": 1344,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "korea--3305-3": {
+        "width": 68,
+        "height": 40,
+        "x": 1412,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "shield09-blue2-white-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 752,
+        "pixelRatio": 2
+    },
+    "us3-blue2-white-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 804,
+        "pixelRatio": 2
+    },
+    "usa-ca-5700-3": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 856,
+        "pixelRatio": 2
+    },
+    "usa-il-6150-3": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 908,
+        "pixelRatio": 2
+    },
+    "usa-tn-7600-3": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 960,
+        "pixelRatio": 2
+    },
+    "usa-in-6200-3": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 1012,
+        "pixelRatio": 2
+    },
+    "usa--8225-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 1064,
+        "pixelRatio": 2
+    },
+    "usa-la-6400-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 1116,
+        "pixelRatio": 2
+    },
+    "shield08-green2-white-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 1168,
+        "pixelRatio": 2
+    },
+    "diamond-green3-white-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 1220,
+        "pixelRatio": 2
+    },
+    "shield09-green3-white-2": {
+        "width": 52,
+        "height": 52,
+        "x": 2294,
+        "y": 1272,
+        "pixelRatio": 2
+    },
+    "mexico--3650-3": {
+        "width": 56,
+        "height": 48,
+        "x": 1430,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "canada-bc-1105-2": {
+        "width": 48,
+        "height": 56,
+        "x": 2294,
+        "y": 1324,
+        "pixelRatio": 2
+    },
+    "canada-sk-1505-3": {
+        "width": 48,
+        "height": 56,
+        "x": 2294,
+        "y": 1380,
+        "pixelRatio": 2
+    },
+    "shield07-white-black-3": {
+        "width": 56,
+        "height": 48,
+        "x": 1486,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-wi-7950-3": {
+        "width": 56,
+        "height": 48,
+        "x": 1542,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-ny-7100-3": {
+        "width": 56,
+        "height": 48,
+        "x": 1598,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "usa-pa-7446-2": {
+        "width": 48,
+        "height": 56,
+        "x": 2294,
+        "y": 1436,
+        "pixelRatio": 2
+    },
+    "canada-on-1010-3": {
+        "width": 48,
+        "height": 56,
+        "x": 2294,
+        "y": 1492,
+        "pixelRatio": 2
+    },
+    "shield07-yellow2-black-3": {
+        "width": 56,
+        "height": 48,
+        "x": 1654,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "shield03-blue2-white-3": {
+        "width": 60,
+        "height": 44,
+        "x": 408,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "canada-ab-1055-2": {
+        "width": 44,
+        "height": 60,
+        "x": 2294,
+        "y": 1548,
+        "pixelRatio": 2
+    },
+    "venezuela--961-3": {
+        "width": 60,
+        "height": 44,
+        "x": 468,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "pentagon-white-black-3": {
+        "width": 60,
+        "height": 44,
+        "x": 528,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "shield03-green2-white-3": {
+        "width": 60,
+        "height": 44,
+        "x": 588,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "canada-nt-1300-2": {
+        "width": 44,
+        "height": 60,
+        "x": 2294,
+        "y": 1608,
+        "pixelRatio": 2
+    },
+    "usa-ar-5650-2": {
+        "width": 52,
+        "height": 50,
+        "x": 2294,
+        "y": 1668,
+        "pixelRatio": 2
+    },
+    "usa-nh-6950-2": {
+        "width": 52,
+        "height": 50,
+        "x": 2294,
+        "y": 1718,
+        "pixelRatio": 2
+    },
+    "usa-or-7350-2": {
+        "width": 52,
+        "height": 50,
+        "x": 2294,
+        "y": 1768,
+        "pixelRatio": 2
+    },
+    "canada-qc-1455-3": {
+        "width": 50,
+        "height": 52,
+        "x": 2294,
+        "y": 1818,
+        "pixelRatio": 2
+    },
+    "usa-wy-8000-3": {
+        "width": 52,
+        "height": 50,
+        "x": 2294,
+        "y": 1870,
+        "pixelRatio": 2
+    },
+    "canada-nl-1250-3": {
+        "width": 54,
+        "height": 48,
+        "x": 2294,
+        "y": 1920,
+        "pixelRatio": 2
+    },
+    "usa-fl-5950-2": {
+        "width": 54,
+        "height": 48,
+        "x": 2294,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "canada-ns-1255-2": {
+        "width": 46,
+        "height": 56,
+        "x": 2294,
+        "y": 2016,
+        "pixelRatio": 2
+    },
+    "canada-sk-1500-2": {
+        "width": 46,
+        "height": 56,
+        "x": 2294,
+        "y": 2072,
+        "pixelRatio": 2
+    },
+    "oval-blue2-white-2": {
+        "width": 64,
+        "height": 40,
+        "x": 1480,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "usa-co-5750-2": {
+        "width": 40,
+        "height": 64,
+        "x": 2294,
+        "y": 2128,
+        "pixelRatio": 2
+    },
+    "canada-mb-1620-3": {
+        "width": 58,
+        "height": 44,
+        "x": 648,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "usa-oh-7250-2": {
+        "width": 50,
+        "height": 50,
+        "x": 2294,
+        "y": 2192,
+        "pixelRatio": 2
+    },
+    "pentagon-blue2-white-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 376,
+        "pixelRatio": 2
+    },
+    "pentagon-brown1-white-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 424,
+        "pixelRatio": 2
+    },
+    "pentagon-green3-white-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 472,
+        "pixelRatio": 2
+    },
+    "shield05-red-white-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 520,
+        "pixelRatio": 2
+    },
+    "usa-vt-7750-2": {
+        "width": 48,
+        "height": 52,
+        "x": 2242,
+        "y": 568,
+        "pixelRatio": 2
+    },
+    "shield10-red-white-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 620,
+        "pixelRatio": 2
+    },
+    "usa-sc-7500-3": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 668,
+        "pixelRatio": 2
+    },
+    "usa-mt-6800-3": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 716,
+        "pixelRatio": 2
+    },
+    "shield10-blue2-white-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 764,
+        "pixelRatio": 2
+    },
+    "taiwan--5300-2": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 812,
+        "pixelRatio": 2
+    },
+    "usa-ri-7450-3": {
+        "width": 52,
+        "height": 48,
+        "x": 2242,
+        "y": 860,
+        "pixelRatio": 2
+    },
+    "usa-tx-7650-2": {
+        "width": 44,
+        "height": 56,
+        "x": 2242,
+        "y": 908,
+        "pixelRatio": 2
+    },
+    "canada-ab-1060-2": {
+        "width": 44,
+        "height": 56,
+        "x": 2242,
+        "y": 964,
+        "pixelRatio": 2
+    },
+    "shield02-white-black-3": {
+        "width": 56,
+        "height": 44,
+        "x": 706,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "canada-mb-1150-2": {
+        "width": 44,
+        "height": 56,
+        "x": 2242,
+        "y": 1020,
+        "pixelRatio": 2
+    },
+    "hexagon-green2-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1668,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "hexagon-red-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1736,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1804,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-yellow2-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1872,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1940,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-blue1-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 2008,
+        "y": 1968,
+        "pixelRatio": 2
+    },
+    "rectangle-blue3-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1544,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "hexagon-orange-black-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1612,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "octagon-blue2-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1680,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "shield04-white-black-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1748,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "octagon-green3-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1816,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "octagon-red-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1884,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "rectangle-green2-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 1952,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "rectangle-red-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 2020,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "rectangle-green3-white-4": {
+        "width": 68,
+        "height": 36,
+        "x": 2088,
+        "y": 2048,
+        "pixelRatio": 2
+    },
+    "rectangle-white-black-5": {
+        "width": 76,
+        "height": 32,
+        "x": 1168,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-orange-black-5": {
+        "width": 76,
+        "height": 32,
+        "x": 1244,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-black-5": {
+        "width": 76,
+        "height": 32,
+        "x": 1320,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-white-green2-5": {
+        "width": 76,
+        "height": 32,
+        "x": 1396,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-white-red-5": {
+        "width": 76,
+        "height": 32,
+        "x": 1472,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "usa-wy-8000-2": {
+        "width": 48,
+        "height": 50,
+        "x": 2242,
+        "y": 1076,
+        "pixelRatio": 2
+    },
+    "usa-az-5600-2": {
+        "width": 48,
+        "height": 50,
+        "x": 2242,
+        "y": 1126,
+        "pixelRatio": 2
+    },
+    "usa-al-5500-2": {
+        "width": 48,
+        "height": 50,
+        "x": 2242,
+        "y": 1176,
+        "pixelRatio": 2
+    },
+    "usa-mo-6750-2": {
+        "width": 48,
+        "height": 50,
+        "x": 2242,
+        "y": 1226,
+        "pixelRatio": 2
+    },
+    "uae--300-2": {
+        "width": 40,
+        "height": 60,
+        "x": 2242,
+        "y": 1276,
+        "pixelRatio": 2
+    },
+    "india--110-2": {
+        "width": 40,
+        "height": 60,
+        "x": 2242,
+        "y": 1336,
+        "pixelRatio": 2
+    },
+    "shield01-blue2-white-2": {
+        "width": 46,
+        "height": 52,
+        "x": 2242,
+        "y": 1396,
+        "pixelRatio": 2
+    },
+    "shield06-blue2-white-2": {
+        "width": 52,
+        "height": 46,
+        "x": 2242,
+        "y": 1448,
+        "pixelRatio": 2
+    },
+    "shield06-green2-white-2": {
+        "width": 52,
+        "height": 46,
+        "x": 2242,
+        "y": 1494,
+        "pixelRatio": 2
+    },
+    "southafrica--9510-2": {
+        "width": 44,
+        "height": 54,
+        "x": 2242,
+        "y": 1540,
+        "pixelRatio": 2
+    },
+    "canada-ab-1651-2": {
+        "width": 42,
+        "height": 56,
+        "x": 2242,
+        "y": 1594,
+        "pixelRatio": 2
+    },
+    "hexagon-yellow2-black-4": {
+        "width": 64,
+        "height": 36,
+        "x": 762,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "circle-blue2-white-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1650,
+        "pixelRatio": 2
+    },
+    "usa-ks-6300-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1698,
+        "pixelRatio": 2
+    },
+    "us2-white-black-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1746,
+        "pixelRatio": 2
+    },
+    "usa-mt-6800-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1794,
+        "pixelRatio": 2
+    },
+    "usa-ny-7100-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1842,
+        "pixelRatio": 2
+    },
+    "shield07-green3-black-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1890,
+        "pixelRatio": 2
+    },
+    "special04-green2-white-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1938,
+        "pixelRatio": 2
+    },
+    "special03-green2-white-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 1986,
+        "pixelRatio": 2
+    },
+    "usa-wi-7950-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 2034,
+        "pixelRatio": 2
+    },
+    "325": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 2082,
+        "pixelRatio": 2
+    },
+    "cuba--11-2": {
+        "width": 48,
+        "height": 48,
+        "x": 2242,
+        "y": 2130,
+        "pixelRatio": 2
+    },
+    "special02-yellow2-green3-2": {
+        "width": 48,
+        "height": 48,
+        "x": 1710,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "special02-white-green3-2": {
+        "width": 48,
+        "height": 48,
+        "x": 1758,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "165": {
+        "width": 48,
+        "height": 48,
+        "x": 1806,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "141": {
+        "width": 48,
+        "height": 48,
+        "x": 1854,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "142": {
+        "width": 48,
+        "height": 48,
+        "x": 1902,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "145": {
+        "width": 48,
+        "height": 48,
+        "x": 1950,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "147": {
+        "width": 48,
+        "height": 48,
+        "x": 1998,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "154": {
+        "width": 48,
+        "height": 48,
+        "x": 2046,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "155": {
+        "width": 48,
+        "height": 48,
+        "x": 2094,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "156": {
+        "width": 48,
+        "height": 48,
+        "x": 2142,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "157": {
+        "width": 48,
+        "height": 48,
+        "x": 2190,
+        "y": 2154,
+        "pixelRatio": 2
+    },
+    "158": {
+        "width": 48,
+        "height": 48,
+        "x": 466,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "160": {
+        "width": 48,
+        "height": 48,
+        "x": 514,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "161": {
+        "width": 48,
+        "height": 48,
+        "x": 562,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "163": {
+        "width": 48,
+        "height": 48,
+        "x": 610,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "164": {
+        "width": 48,
+        "height": 48,
+        "x": 658,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-highway-5450-2": {
+        "width": 48,
+        "height": 48,
+        "x": 706,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "166": {
+        "width": 48,
+        "height": 48,
+        "x": 754,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "167": {
+        "width": 48,
+        "height": 48,
+        "x": 802,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "168": {
+        "width": 48,
+        "height": 48,
+        "x": 850,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "169": {
+        "width": 48,
+        "height": 48,
+        "x": 898,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "170": {
+        "width": 48,
+        "height": 48,
+        "x": 946,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "171": {
+        "width": 48,
+        "height": 48,
+        "x": 994,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "172": {
+        "width": 48,
+        "height": 48,
+        "x": 1042,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "173": {
+        "width": 48,
+        "height": 48,
+        "x": 1090,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "174": {
+        "width": 48,
+        "height": 48,
+        "x": 1138,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "176": {
+        "width": 48,
+        "height": 48,
+        "x": 1186,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "177": {
+        "width": 48,
+        "height": 48,
+        "x": 1234,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "252": {
+        "width": 48,
+        "height": 48,
+        "x": 1282,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "circle-green2-white-2": {
+        "width": 48,
+        "height": 48,
+        "x": 1330,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "saudiarabia--4755-2": {
+        "width": 48,
+        "height": 48,
+        "x": 1378,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "peru--8850-2": {
+        "width": 48,
+        "height": 48,
+        "x": 1426,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "pill-white-black-4": {
+        "width": 72,
+        "height": 32,
+        "x": 1548,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "usa-county-8200-2": {
+        "width": 50,
+        "height": 46,
+        "x": 1474,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-ca-5700-2": {
+        "width": 44,
+        "height": 52,
+        "x": 1664,
+        "y": 1440,
+        "pixelRatio": 2
+    },
+    "usa-il-6150-2": {
+        "width": 44,
+        "height": 52,
+        "x": 1664,
+        "y": 1492,
+        "pixelRatio": 2
+    },
+    "usa-in-6200-2": {
+        "width": 44,
+        "height": 52,
+        "x": 1888,
+        "y": 1728,
+        "pixelRatio": 2
+    },
+    "shield12-blue2-white-2": {
+        "width": 52,
+        "height": 44,
+        "x": 1524,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "canada-ab-1045-1": {
+        "width": 44,
+        "height": 52,
+        "x": 112,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "hexagon2-blue2-white-2": {
+        "width": 52,
+        "height": 44,
+        "x": 1576,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "usa-tn-7600-2": {
+        "width": 44,
+        "height": 52,
+        "x": 156,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "hexagon-green3-yellow2-3": {
+        "width": 56,
+        "height": 40,
+        "x": 1628,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "korea--3305-2": {
+        "width": 56,
+        "height": 40,
+        "x": 1684,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "canada-sk-1505-2": {
+        "width": 40,
+        "height": 56,
+        "x": 2348,
+        "y": 0,
+        "pixelRatio": 2
+    },
+    "canada-on-1010-2": {
+        "width": 40,
+        "height": 56,
+        "x": 2348,
+        "y": 56,
+        "pixelRatio": 2
+    },
+    "octagon-green2-white-3": {
+        "width": 56,
+        "height": 40,
+        "x": 1740,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "argentina--360-2": {
+        "width": 40,
+        "height": 56,
+        "x": 2348,
+        "y": 112,
+        "pixelRatio": 2
+    },
+    "usa-sd-7550-2": {
+        "width": 46,
+        "height": 48,
+        "x": 200,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "canada-mb-1620-2": {
+        "width": 50,
+        "height": 44,
+        "x": 246,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "hexagon-orange-black-3": {
+        "width": 60,
+        "height": 36,
+        "x": 826,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "uae--305-2": {
+        "width": 36,
+        "height": 60,
+        "x": 2348,
+        "y": 168,
+        "pixelRatio": 2
+    },
+    "hexagon-green2-white-3": {
+        "width": 60,
+        "height": 36,
+        "x": 886,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "hexagon-red-white-3": {
+        "width": 60,
+        "height": 36,
+        "x": 946,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "canada-ab-1050-2": {
+        "width": 38,
+        "height": 56,
+        "x": 2348,
+        "y": 228,
+        "pixelRatio": 2
+    },
+    "australia--420-2": {
+        "width": 44,
+        "height": 48,
+        "x": 0,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "usa-ri-7450-2": {
+        "width": 44,
+        "height": 48,
+        "x": 44,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "usa-sc-7500-2": {
+        "width": 44,
+        "height": 48,
+        "x": 88,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "indonesia--550-2": {
+        "width": 48,
+        "height": 44,
+        "x": 296,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "indonesia--555-2": {
+        "width": 48,
+        "height": 44,
+        "x": 344,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "indonesia--565-2": {
+        "width": 48,
+        "height": 44,
+        "x": 392,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "venezuela--961-2": {
+        "width": 48,
+        "height": 44,
+        "x": 440,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "shield03-blue2-white-2": {
+        "width": 48,
+        "height": 44,
+        "x": 488,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "shield03-green2-white-2": {
+        "width": 48,
+        "height": 44,
+        "x": 536,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "colombia--16-2": {
+        "width": 44,
+        "height": 48,
+        "x": 132,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "pentagon-white-black-2": {
+        "width": 48,
+        "height": 44,
+        "x": 584,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "shield07-yellow2-black-2": {
+        "width": 44,
+        "height": 48,
+        "x": 176,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "shield07-white-black-2": {
+        "width": 44,
+        "height": 48,
+        "x": 220,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "us1-white-black-3": {
+        "width": 52,
+        "height": 40,
+        "x": 1796,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "LEZ_marker": {
+        "width": 64,
+        "height": 32,
+        "x": 1620,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-white-green2-4": {
+        "width": 64,
+        "height": 32,
+        "x": 1684,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-white-red-4": {
+        "width": 64,
+        "height": 32,
+        "x": 1748,
+        "y": 1680,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-black-4": {
+        "width": 64,
+        "height": 32,
+        "x": 1006,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-orange-black-4": {
+        "width": 64,
+        "height": 32,
+        "x": 1070,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-white-black-4": {
+        "width": 64,
+        "height": 32,
+        "x": 1134,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-green3-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 1848,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "octagon-blue2-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 1904,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "rectangle-red-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 1960,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "rectangle-green2-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 2016,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "rectangle-brown2-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 2072,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "octagon-red-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 2128,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "canada-nl-1250-2": {
+        "width": 42,
+        "height": 48,
+        "x": 264,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "octagon-green3-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 2184,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "rectangle-blue1-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 632,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue3-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 688,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-yellow2-3": {
+        "width": 56,
+        "height": 36,
+        "x": 744,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 800,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "hexagon-yellow2-black-3": {
+        "width": 56,
+        "height": 36,
+        "x": 856,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "mexico--3650-2": {
+        "width": 42,
+        "height": 48,
+        "x": 306,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "shield04-white-black-3": {
+        "width": 56,
+        "height": 36,
+        "x": 912,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-white-3": {
+        "width": 56,
+        "height": 36,
+        "x": 968,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "canada-on-1360-3": {
+        "width": 50,
+        "height": 40,
+        "x": 348,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "hexagon-green3-yellow2-2": {
+        "width": 48,
+        "height": 40,
+        "x": 398,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "octagon-green2-white-2": {
+        "width": 48,
+        "height": 40,
+        "x": 446,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "pill-white-black-3": {
+        "width": 60,
+        "height": 32,
+        "x": 1198,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "cuba--10-2": {
+        "width": 48,
+        "height": 40,
+        "x": 494,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "taiwan--5305-2": {
+        "width": 48,
+        "height": 40,
+        "x": 542,
+        "y": 2314,
+        "pixelRatio": 2
+    },
+    "hexagon-orange-black-2": {
+        "width": 48,
+        "height": 36,
+        "x": 2240,
+        "y": 2206,
+        "pixelRatio": 2
+    },
+    "hexagon-red-white-2": {
+        "width": 48,
+        "height": 36,
+        "x": 1024,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "shield04-white-black-2": {
+        "width": 48,
+        "height": 36,
+        "x": 1072,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "octagon-red-white-2": {
+        "width": 48,
+        "height": 36,
+        "x": 1120,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "hexagon-green2-white-2": {
+        "width": 48,
+        "height": 36,
+        "x": 1168,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "octagon-green3-white-2": {
+        "width": 48,
+        "height": 36,
+        "x": 1216,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "octagon-blue2-white-2": {
+        "width": 48,
+        "height": 36,
+        "x": 1264,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "shield02-white-black-2": {
+        "width": 38,
+        "height": 44,
+        "x": 2348,
+        "y": 284,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-black-3": {
+        "width": 52,
+        "height": 32,
+        "x": 1258,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-orange-black-3": {
+        "width": 52,
+        "height": 32,
+        "x": 1310,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-white-black-3": {
+        "width": 52,
+        "height": 32,
+        "x": 1362,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "pill-white-black-2": {
+        "width": 52,
+        "height": 32,
+        "x": 1414,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-white-green2-3": {
+        "width": 52,
+        "height": 32,
+        "x": 1466,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-white-red-3": {
+        "width": 52,
+        "height": 32,
+        "x": 1518,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-green3-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1664,
+        "y": 1544,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1888,
+        "y": 1780,
+        "pixelRatio": 2
+    },
+    "rectangle-green2-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1312,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-yellow2-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1358,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-red-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1404,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue1-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1450,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue3-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1496,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-blue2-white-2": {
+        "width": 46,
+        "height": 36,
+        "x": 1542,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "us1-white-black-2": {
+        "width": 40,
+        "height": 40,
+        "x": 2348,
+        "y": 328,
+        "pixelRatio": 2
+    },
+    "shield11-yellow2-black-2": {
+        "width": 40,
+        "height": 40,
+        "x": 2348,
+        "y": 368,
+        "pixelRatio": 2
+    },
+    "shield11-white-black-2": {
+        "width": 40,
+        "height": 40,
+        "x": 2348,
+        "y": 408,
+        "pixelRatio": 2
+    },
+    "hexagon-yellow2-black-2": {
+        "width": 44,
+        "height": 36,
+        "x": 1588,
+        "y": 2262,
+        "pixelRatio": 2
+    },
+    "rectangle-white-black-2": {
+        "width": 42,
+        "height": 32,
+        "x": 1570,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-yellow2-black-2": {
+        "width": 42,
+        "height": 32,
+        "x": 1612,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-orange-black-2": {
+        "width": 42,
+        "height": 32,
+        "x": 1654,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-white-red-2": {
+        "width": 42,
+        "height": 32,
+        "x": 1696,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "rectangle-white-green2-2": {
+        "width": 42,
+        "height": 32,
+        "x": 1738,
+        "y": 2108,
+        "pixelRatio": 2
+    },
+    "capitalBeijing": {
+        "width": 36,
+        "height": 36,
+        "x": 2348,
+        "y": 448,
+        "pixelRatio": 2
+    },
+    "under-construction": {
+        "width": 32,
+        "height": 32,
+        "x": 2348,
+        "y": 484,
+        "pixelRatio": 2
+    },
+    "traffic-flow-queueing": {
+        "width": 48,
+        "height": 14,
+        "x": 2294,
+        "y": 2242,
+        "pixelRatio": 2
+    },
+    "traffic-flow-slow": {
+        "width": 48,
+        "height": 14,
+        "x": 2242,
+        "y": 2178,
+        "pixelRatio": 2
+    },
+    "traffic-flow-stationary": {
+        "width": 48,
+        "height": 14,
+        "x": 2242,
+        "y": 2192,
+        "pixelRatio": 2
+    },
+    "traffic-incidents-dark-queueing": {
+        "width": 48,
+        "height": 14,
+        "x": 2170,
+        "y": 2126,
+        "pixelRatio": 2
+    },
+    "traffic-incidents-dark-slow": {
+        "width": 48,
+        "height": 14,
+        "x": 2170,
+        "y": 2140,
+        "pixelRatio": 2
+    },
+    "traffic-incidents-dark-stationary": {
+        "width": 48,
+        "height": 14,
+        "x": 2022,
+        "y": 1948,
+        "pixelRatio": 2
+    },
+    "traffic-diagonal-closed": {
+        "width": 40,
+        "height": 16,
+        "x": 2348,
+        "y": 516,
+        "pixelRatio": 2
+    },
+    "traffic-diagonal-dark-closed": {
+        "width": 40,
+        "height": 16,
+        "x": 2348,
+        "y": 532,
+        "pixelRatio": 2
+    },
+    "traffic-diagonal-dark-unknown": {
+        "width": 40,
+        "height": 16,
+        "x": 2348,
+        "y": 548,
+        "pixelRatio": 2
+    },
+    "capitalPopRank0": {
+        "width": 23,
+        "height": 23,
+        "x": 2348,
+        "y": 564,
+        "pixelRatio": 2
+    },
+    "capitalPopRank1": {
+        "width": 21,
+        "height": 21,
+        "x": 2348,
+        "y": 587,
+        "pixelRatio": 2
+    },
+    "capitalPopRank2": {
+        "width": 20,
+        "height": 20,
+        "x": 2348,
+        "y": 608,
+        "pixelRatio": 2
+    },
+    "cityPopRank0": {
+        "width": 20,
+        "height": 20,
+        "x": 2368,
+        "y": 608,
+        "pixelRatio": 2
+    },
+    "capitalPopRank3": {
+        "width": 18,
+        "height": 18,
+        "x": 2369,
+        "y": 587,
+        "pixelRatio": 2
+    },
+    "cityPopRank1": {
+        "width": 18,
+        "height": 18,
+        "x": 2348,
+        "y": 628,
+        "pixelRatio": 2
+    },
+    "cityPopRank2": {
+        "width": 17,
+        "height": 17,
+        "x": 2371,
+        "y": 564,
+        "pixelRatio": 2
+    },
+    "arrow-revers": {
+        "width": 16,
+        "height": 16,
+        "x": 2366,
+        "y": 628,
+        "pixelRatio": 2
+    },
+    "arrow": {
+        "width": 16,
+        "height": 16,
+        "x": 2348,
+        "y": 646,
+        "pixelRatio": 2
+    },
+    "cityPopRank3": {
+        "width": 15,
+        "height": 15,
+        "x": 2364,
+        "y": 646,
+        "pixelRatio": 2
+    },
+    "cityPopRank4": {
+        "width": 14,
+        "height": 14,
+        "x": 2348,
+        "y": 662,
+        "pixelRatio": 2
+    },
+    "1": {
+        "width": 1,
+        "height": 1,
+        "x": 2384,
+        "y": 168,
+        "pixelRatio": 2
+    }
+}
