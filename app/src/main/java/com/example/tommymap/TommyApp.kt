@@ -7,6 +7,6 @@ class TommyApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        NavSdkExtension().hookForSmoothTransition()
+        NavSdkExtension().hookSetStyle()
     }
 }
