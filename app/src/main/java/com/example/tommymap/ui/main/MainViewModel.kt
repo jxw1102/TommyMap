@@ -9,6 +9,7 @@ import com.example.tommymap.BuildConfig
 import com.example.tommymap.R
 import com.example.tommymap.data.NavigationRepository
 import com.example.tommymap.data.TommyLocationProvider
+import com.example.tommymap.withinLength5
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.extension.library.IncidentDetailApi
 import com.tomtom.sdk.location.GeoLocation
@@ -45,7 +46,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlin.time.Duration
 
 class MainViewModel(
     private val locationProvider: TommyLocationProvider,
@@ -74,6 +75,12 @@ class MainViewModel(
     private var routePlans: MutableList<RoutePlan> = mutableListOf()
     private val _selectedRoutePlan = MutableStateFlow<RoutePlan?>(null)
     val selectedRoutePlan: StateFlow<RoutePlan?> = _selectedRoutePlan
+
+    private val locationMarkerOptions = LocationMarkerOptions(
+        type = LocationMarkerOptions.Type.Custom,
+        customModel = Uri.parse("asset://xpeng_2.glb"),
+        markerMagnification = 2.0
+    )
 
     private val origin: GeoPoint?
         get() = locationProvider.lastKnownLocation?.position
@@ -178,6 +185,7 @@ class MainViewModel(
             layerMappingUri = Uri.parse("asset://styles/onboard_layer_mapping.json"),
             darkLayerMappingUri = Uri.parse("asset://styles/onboard_layer_mapping.json"),
         ), styleLoadingCallback)
+        tomTomMap.enableLocationMarker(locationMarkerOptions)
         listenToCurrentPosition()
         listenToDestination()
         listenToIncidents()
@@ -198,7 +206,7 @@ class MainViewModel(
 
     fun onNavigationStarted(bottomPadding: Int) {
         tomTomMap.cameraTrackingMode = CameraTrackingMode.FollowRouteDirection
-        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
+//        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
         locationProvider.useMapMatchedLocationProvider(tomTomNavigation)
         tomTomMap.setPadding(Padding(0, 0, 0, bottomPadding))
     }
@@ -213,14 +221,14 @@ class MainViewModel(
         _navigationStarted.value = false
         locationProvider.useAndroidLocationProvider()
         tomTomMap.cameraTrackingMode = CameraTrackingMode.None
-        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
+//        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
         tomTomMap.setPadding(Padding(0, 0, 0, 0))
         clearMap()
     }
 
     private fun listenToCurrentPosition() {
-        val markerOptions = LocationMarkerOptions(type = LocationMarkerOptions.Type.Pointer)
-        tomTomMap.enableLocationMarker(markerOptions)
+//        val markerOptions = LocationMarkerOptions(type = LocationMarkerOptions.Type.Pointer)
+//        tomTomMap.enableLocationMarker(markerOptions)
         moveMapCamera()
         viewModelScope.launch {
             _permissionStateFlow.collect { granted ->
@@ -264,10 +272,18 @@ class MainViewModel(
     private fun listenToIncidents() {
         tomTomMap.showTrafficIncidents()
         tomTomMap.addTrafficIncidentClickListener { incidents, _ ->
+            _incidentMessage.value = ""
 //            _incidentMessage.value = incidents.map { it.descriptions.first().cause }.distinct().joinToString("\n")
             viewModelScope.launch {
-                val response = incidentDetailApi.getIncidentDetail(incidents.map { it.id!! }, "zh-TW", BuildConfig.TOMTOM_API_KEY)
-                _incidentMessage.value = response.incidents.map { it.properties.events.first().description }.distinct().joinToString("\n")
+                val response = incidentDetailApi.getIncidentDetail(
+                    ids = incidents.map { it.id!! }.withinLength5(),
+                    lang = "zh-TW",
+                    apiKey = BuildConfig.TOMTOM_API_KEY
+                )
+                _incidentMessage.value = response.incidents
+                    .map { it.properties.events.first().description }
+                    .distinct()
+                    .joinToString("\n")
             }
         }
     }

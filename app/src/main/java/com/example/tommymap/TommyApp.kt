@@ -5,8 +5,11 @@ import com.tomtom.sdk.extension.library.NavSdkExtension
 
 class TommyApp: Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        NavSdkExtension().hookSetStyle()
+    init {
+        NavSdkExtension().customizeLocationMarker(
+            color = "#FFFFFF",
+            ambient = 0.8,
+            gamma = 3.6
+        )
     }
 }

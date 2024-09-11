@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
         styleButton.setOnClickListener {
             mainViewModel.toggleMapStyle()
         }
-         */
+        */
 
         requestLocationPermission()
         configureViewModel()

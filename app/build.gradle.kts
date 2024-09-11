@@ -11,6 +11,17 @@ navSdkExtension {
 dependencies {
     implementation("com.tomtom.sdk.extension:library:0.0.1")
 
+    val tom2Version = "1.11.0"
+    implementation("com.tomtom.sdk.maps:map-display:$tom2Version")
+    implementation("com.tomtom.sdk.location:provider-android:$tom2Version")
+    implementation("com.tomtom.sdk.location:provider-simulation:$tom2Version")
+    implementation("com.tomtom.sdk.location:provider-map-matched:$tom2Version")
+    implementation("com.tomtom.sdk.search:search-online:$tom2Version")
+    implementation("com.tomtom.sdk.routing:route-planner-online:$tom2Version")
+    implementation("com.tomtom.sdk.navigation:navigation-online:$tom2Version")
+    implementation("com.tomtom.sdk.navigation:route-replanner-online:$tom2Version")
+    implementation("com.tomtom.sdk.navigation:ui:$tom2Version")
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
@@ -35,17 +46,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    val tom2Version = "1.11.0"
-    implementation("com.tomtom.sdk.maps:map-display:$tom2Version")
-    implementation("com.tomtom.sdk.location:provider-android:$tom2Version")
-    implementation("com.tomtom.sdk.location:provider-simulation:$tom2Version")
-    implementation("com.tomtom.sdk.location:provider-map-matched:$tom2Version")
-    implementation("com.tomtom.sdk.search:search-online:$tom2Version")
-    implementation("com.tomtom.sdk.routing:route-planner-online:$tom2Version")
-    implementation("com.tomtom.sdk.navigation:navigation-online:$tom2Version")
-    implementation("com.tomtom.sdk.navigation:route-replanner-online:$tom2Version")
-    implementation("com.tomtom.sdk.navigation:ui:$tom2Version")
 }
 
 val tomtomApiKey: String by project
