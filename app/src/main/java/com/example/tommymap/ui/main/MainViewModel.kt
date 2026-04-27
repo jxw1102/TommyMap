@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.tommymap.R
 import com.example.tommymap.data.NavigationRepository
+import com.example.tommymap.data.TommyDispatchers
 import com.example.tommymap.data.TommyLocationProvider
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
-import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.OnLocationUpdateListener
 import com.tomtom.sdk.map.display.TomTomMap
 import com.tomtom.sdk.map.display.camera.CameraOptions
@@ -25,6 +25,7 @@ import com.tomtom.sdk.map.display.route.RouteOptions
 import com.tomtom.sdk.navigation.ActiveRouteChangedListener
 import com.tomtom.sdk.navigation.DestinationArrivalListener
 import com.tomtom.sdk.navigation.GuidanceUpdatedListener
+import com.tomtom.sdk.navigation.NavigationOptions
 import com.tomtom.sdk.navigation.ProgressUpdatedListener
 import com.tomtom.sdk.navigation.RouteAddedListener
 import com.tomtom.sdk.navigation.RouteAddedReason
@@ -66,53 +67,68 @@ class MainViewModel(
     private val _selectedRoutePlan = MutableStateFlow<RoutePlan?>(null)
     val selectedRoutePlan: StateFlow<RoutePlan?> = _selectedRoutePlan
 
-    private var simulationLocationProvider: LocationProvider? = null
-
     private val origin: GeoPoint?
         get() = locationProvider.lastKnownLocation?.position
 
+    // The SDK delivers callbacks on its own threads (typically main or DefaultDispatcher-worker-*).
+    // We re-dispatch onto the navigation dispatcher so that all app-side handling of navigation
+    // events runs on the dedicated single-thread pool — same as the customer's setup.
     private val routeAddedListener by lazy {
         RouteAddedListener { route, _, routeAddedReason ->
-            Log.d("TommyMain", "RouteAddedListener ${route.id} ${routeAddedReason.javaClass.name}")
-            if (routeAddedReason !is RouteAddedReason.NavigationStarted) {
-                drawRoute(
-                    route = route,
-                    color = RouteOptions.DEFAULT_UNREACHABLE_COLOR,
-                    withDepartureMarker = false,
-                    withZoom = false
-                )
+            onNavigationThread {
+                Log.d("TommyMain", "[${currentThreadName()}] RouteAddedListener ${route.id} ${routeAddedReason.javaClass.name}")
+                if (routeAddedReason !is RouteAddedReason.NavigationStarted) {
+                    onMap {
+                        drawRoute(
+                            route = route,
+                            color = RouteOptions.DEFAULT_UNREACHABLE_COLOR,
+                            withDepartureMarker = false,
+                            withZoom = false
+                        )
+                    }
+                }
             }
         }
     }
 
     private val routeRemovedListener by lazy {
         RouteRemovedListener { route, _ ->
-            Log.d("TommyMain", "RouteRemovedListener ${route.id}")
-            tomTomMap.routes.find { it.tag == route.id.toString() }?.remove()
+            onNavigationThread {
+                Log.d("TommyMain", "[${currentThreadName()}] RouteRemovedListener ${route.id}")
+                onMap { tomTomMap.routes.find { it.tag == route.id.toString() }?.remove() }
+            }
         }
     }
 
     private val activeRouteChangedListener by lazy {
         ActiveRouteChangedListener { route ->
-            Log.d("TommyMain", "ActiveRouteChangedListener ${route.id}")
-            tomTomMap.routes.forEach {
-                if (it.tag == route.id.toString()) {
-                    it.color = RouteOptions.DEFAULT_COLOR
-                } else {
-                    it.color = RouteOptions.DEFAULT_UNREACHABLE_COLOR
+            onNavigationThread {
+                Log.d("TommyMain", "[${currentThreadName()}] ActiveRouteChangedListener ${route.id}")
+                onMap {
+                    tomTomMap.routes.forEach {
+                        it.color = if (it.tag == route.id.toString()) {
+                            RouteOptions.DEFAULT_COLOR
+                        } else {
+                            RouteOptions.DEFAULT_UNREACHABLE_COLOR
+                        }
+                    }
                 }
             }
         }
     }
 
-    private val progressUpdatedListener = ProgressUpdatedListener {
-        Log.d("TommyMain", "ProgressUpdatedListener $it")
-        tomTomMap.routes.firstOrNull()?.progress = it.distanceAlongRoute
+    private val progressUpdatedListener = ProgressUpdatedListener { progress ->
+        onNavigationThread {
+            Log.d("TommyMain", "[${currentThreadName()}] ProgressUpdatedListener $progress")
+            onMap { tomTomMap.routes.firstOrNull()?.progress = progress.distanceAlongRoute }
+        }
     }
 
     private val destinationArrivalListener = DestinationArrivalListener { route ->
-        Log.d("TommyMain", "DestinationArrivalListener ${route.id}")
-        _destinationArrived.value = true
+        onNavigationThread {
+            Log.d("TommyMain", "[${currentThreadName()}] DestinationArrivalListener ${route.id}")
+            _destinationArrived.value = true
+        }
     }
 
     private val routeClickListener = RouteClickListener { route ->
@@ -128,7 +144,10 @@ class MainViewModel(
             announcement: GuidanceAnnouncement,
             shouldPlay: Boolean
         ) {
-            _announcementMessage.value = announcement.plainTextMessage
+            onNavigationThread {
+                Log.d("TommyMain", "[${currentThreadName()}] GuidanceUpdated.onAnnouncementGenerated ${announcement.plainTextMessage}")
+                _announcementMessage.value = announcement.plainTextMessage
+            }
         }
 
         override fun onDistanceToNextInstructionChanged(
@@ -136,16 +155,26 @@ class MainViewModel(
             instructions: List<GuidanceInstruction>,
             currentPhase: InstructionPhase
         ) {
-            // do nothing
+            onNavigationThread {
+                Log.d("TommyMain", "[${currentThreadName()}] GuidanceUpdated.onDistanceToNextInstructionChanged $distance phase=${currentPhase.javaClass.simpleName}")
+            }
         }
 
         override fun onInstructionsChanged(instructions: List<GuidanceInstruction>) {
-            // do nothing
+            onNavigationThread {
+                Log.d("TommyMain", "[${currentThreadName()}] GuidanceUpdated.onInstructionsChanged count=${instructions.size}")
+            }
         }
     }
 
+    private fun currentThreadName(): String = Thread.currentThread().name
+
+    private fun onNavigationThread(block: () -> Unit) {
+        viewModelScope.launch(TommyDispatchers.navigation) { block() }
+    }
+
     override fun onCleared() {
-        tomTomMap.setLocationProvider(null)
+        onMap { tomTomMap.setLocationProvider(null) }
         super.onCleared()
     }
 
@@ -157,65 +186,73 @@ class MainViewModel(
         this.tomTomMap = tomTomMap
         listenToCurrentPosition()
         listenToDestination()
-        tomTomMap.addRouteClickListener(routeClickListener)
+        onMap { tomTomMap.addRouteClickListener(routeClickListener) }
     }
 
     fun startNavigation() {
+        val routePlan = selectedRoutePlan.value ?: return
         _navigationStarted.value = true
         _destinationArrived.value = false
         _announcementMessage.value = ""
-        simulationLocationProvider = TommyLocationProvider.createSimulationLocationProvider(selectedRoutePlan.value!!.route)
-        tomTomNavigation.locationProvider = simulationLocationProvider!!
-        tomTomNavigation.addProgressUpdatedListener(progressUpdatedListener)
-        tomTomNavigation.addRouteAddedListener(routeAddedListener)
-        tomTomNavigation.addRouteRemovedListener(routeRemovedListener)
-        tomTomNavigation.addActiveRouteChangedListener(activeRouteChangedListener)
-        tomTomNavigation.addDestinationArrivalListener(destinationArrivalListener)
-        tomTomNavigation.addGuidanceUpdatedListener(guidanceUpdatedListener)
+        // tomTomNavigation already holds the TommyLocationProvider wrapper from
+        // the factory Configuration; the wrapper currently delegates to
+        // AndroidLocationProvider, so navigation receives real device GPS.
+        viewModelScope.launch(TommyDispatchers.navigation) {
+            tomTomNavigation.addProgressUpdatedListener(progressUpdatedListener)
+            tomTomNavigation.addRouteAddedListener(routeAddedListener)
+            tomTomNavigation.addRouteRemovedListener(routeRemovedListener)
+            tomTomNavigation.addActiveRouteChangedListener(activeRouteChangedListener)
+            tomTomNavigation.addDestinationArrivalListener(destinationArrivalListener)
+            tomTomNavigation.addGuidanceUpdatedListener(guidanceUpdatedListener)
+            tomTomNavigation.start(NavigationOptions(routePlan))
+        }
     }
 
     fun onNavigationStarted(bottomPadding: Int) {
-        tomTomMap.cameraTrackingMode = CameraTrackingMode.FollowRouteDirection
-        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
-        locationProvider.useMapMatchedLocationProvider(tomTomNavigation)
-        tomTomMap.setPadding(Padding(0, 0, 0, bottomPadding))
+        onMap {
+            tomTomMap.cameraTrackingMode = CameraTrackingMode.FollowRouteDirection
+            tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
+            tomTomMap.setPadding(Padding(0, 0, 0, bottomPadding))
+        }
     }
 
     fun stopNavigation() {
-        tomTomNavigation.stop()
-        simulationLocationProvider?.close()
-        simulationLocationProvider = null
-        tomTomNavigation.removeProgressUpdatedListener(progressUpdatedListener)
-        tomTomNavigation.removeRouteAddedListener(routeAddedListener)
-        tomTomNavigation.removeRouteRemovedListener(routeRemovedListener)
-        tomTomNavigation.removeActiveRouteChangedListener(activeRouteChangedListener)
-        tomTomNavigation.removeDestinationArrivalListener(destinationArrivalListener)
-        tomTomNavigation.removeGuidanceUpdatedListener(guidanceUpdatedListener)
+        viewModelScope.launch(TommyDispatchers.navigation) {
+            tomTomNavigation.stop()
+            tomTomNavigation.removeProgressUpdatedListener(progressUpdatedListener)
+            tomTomNavigation.removeRouteAddedListener(routeAddedListener)
+            tomTomNavigation.removeRouteRemovedListener(routeRemovedListener)
+            tomTomNavigation.removeActiveRouteChangedListener(activeRouteChangedListener)
+            tomTomNavigation.removeDestinationArrivalListener(destinationArrivalListener)
+            tomTomNavigation.removeGuidanceUpdatedListener(guidanceUpdatedListener)
+        }
         _navigationStarted.value = false
         _destinationArrived.value = false
         _announcementMessage.value = ""
-        locationProvider.useAndroidLocationProvider()
-        tomTomMap.cameraTrackingMode = CameraTrackingMode.None
-        tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
-        tomTomMap.setPadding(Padding(0, 0, 0, 0))
-        clearMap()
+        onMap {
+            tomTomMap.cameraTrackingMode = CameraTrackingMode.None
+            tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
+            tomTomMap.setPadding(Padding(0, 0, 0, 0))
+            clearMap()
+        }
         routePlans.clear()
         _selectedRoutePlan.value = null
         navigationRepository.clearDestination()
     }
 
     private fun listenToCurrentPosition() {
-        val markerOptions = LocationMarkerOptions(type = LocationMarkerOptions.Type.Pointer)
-        tomTomMap.enableLocationMarker(markerOptions)
-        moveMapCamera()
+        onMap {
+            tomTomMap.enableLocationMarker(LocationMarkerOptions(type = LocationMarkerOptions.Type.Pointer))
+            moveMapCamera()
+        }
         viewModelScope.launch {
             _permissionStateFlow.collect { granted ->
                 if (!granted) return@collect
                 locationProvider.useAndroidLocationProvider()
-                tomTomMap.setLocationProvider(locationProvider.also { it.enable() })
+                onMap { tomTomMap.setLocationProvider(locationProvider.also { it.enable() }) }
                 locationProvider.addOnLocationUpdateListener(object : OnLocationUpdateListener {
                     override fun onLocationUpdate(location: GeoLocation) {
-                        moveMapCamera(location.position)
+                        onMap { moveMapCamera(location.position) }
                         locationProvider.removeOnLocationUpdateListener(this)
                     }
                 })
@@ -226,19 +263,20 @@ class MainViewModel(
     private fun listenToDestination() {
         viewModelScope.launch {
             navigationRepository.destination.collect { value ->
-                value?.let { destination ->
-                    if (!_permissionStateFlow.value) {
-                        showDestinationMarker(destination)
-                    }
-                    if (origin == null) return@let
-                    navigationRepository.planRoute(origin!!, destination).catch {
-                        Log.e("TommyMain", "${it.javaClass.name} ${it.message}")
-                    }.collect { routePlans ->
+                val destination = value ?: return@collect
+                if (!_permissionStateFlow.value) {
+                    onMap { showDestinationMarker(destination) }
+                }
+                val o = origin ?: return@collect
+                navigationRepository.planRoute(o, destination).catch {
+                    Log.e("TommyMain", "${it.javaClass.name} ${it.message}")
+                }.collect { plans ->
+                    _selectedRoutePlan.value = plans.first()
+                    this@MainViewModel.routePlans = plans.toMutableList()
+                    onMap {
                         tomTomMap.removeRoutes()
-                        _selectedRoutePlan.value = routePlans.first()
-                        routePlans.drop(1).forEach { drawRoute(it.route, RouteOptions.DEFAULT_UNREACHABLE_COLOR, withDepartureMarker = true, withZoom = false) }
-                        drawRoute(routePlans.first().route, RouteOptions.DEFAULT_COLOR, withDepartureMarker = true, withZoom = true)
-                        this@MainViewModel.routePlans = routePlans.toMutableList()
+                        plans.drop(1).forEach { drawRoute(it.route, RouteOptions.DEFAULT_UNREACHABLE_COLOR, withDepartureMarker = true, withZoom = false) }
+                        drawRoute(plans.first().route, RouteOptions.DEFAULT_COLOR, withDepartureMarker = true, withZoom = true)
                     }
                 }
             }
@@ -300,6 +338,10 @@ class MainViewModel(
         if (withZoom) {
             tomTomMap.zoomToRoutes(100)
         }
+    }
+
+    private fun onMap(block: () -> Unit) {
+        viewModelScope.launch(TommyDispatchers.map) { block() }
     }
 
     class Factory(

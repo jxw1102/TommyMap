@@ -11,7 +11,6 @@ import com.tomtom.sdk.routing.options.guidance.ExtendedSections
 import com.tomtom.sdk.routing.options.guidance.GuidanceOptions
 import com.tomtom.sdk.routing.options.guidance.RoadShieldReferences
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +26,7 @@ interface NavigationRepository {
 
 class NavigationRepositoryImpl(
     private val routePlanner: RoutePlanner,
-    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val coroutineDispatcher: CoroutineDispatcher = TommyDispatchers.routing
 ) : NavigationRepository {
 
     private val _destination = MutableStateFlow<GeoPoint?>(null)

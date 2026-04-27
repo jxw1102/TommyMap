@@ -1,12 +1,9 @@
 package com.example.tommymap.data
 
-import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.search.Search
 import com.tomtom.sdk.search.SearchOptions
-import com.tomtom.sdk.search.model.geometry.CircleGeometry
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -17,15 +14,14 @@ interface SearchRepository {
 
 class SearchRepositoryImpl(
     private val searchDataSource: Search,
-    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val coroutineDispatcher: CoroutineDispatcher = TommyDispatchers.search
 ) : SearchRepository {
 
     override fun search(text: String, geoBias: GeoPoint?) = flow {
         val searchOptions = SearchOptions(
             query = text,
             geoBias = geoBias,
-            limit = 10,
-            searchAreas = geoBias?.let { setOf(CircleGeometry(it, Distance.kilometers(10))) } ?: emptySet()
+            limit = 10
         )
         val result = searchDataSource.search(searchOptions)
         if (result.isSuccess()) {

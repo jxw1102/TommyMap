@@ -31,6 +31,10 @@ import com.example.tommymap.data.SearchRepositoryImpl
 import com.example.tommymap.data.TommyLocationProvider
 import com.example.tommymap.dp2px
 import com.example.tommymap.isLocationPermissionGranted
+import androidx.lifecycle.viewModelScope
+import com.example.tommymap.ui.debug.CoroutineDebugCard
+import com.example.tommymap.ui.debug.ThreadDebugCard
+import kotlinx.coroutines.CoroutineScope
 import com.example.tommymap.ui.search.SearchViewModel
 import com.example.tommymap.ui.search.TommySearchView
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStore
@@ -95,16 +99,6 @@ class MainActivity : AppCompatActivity() {
         NavigationFragment.newInstance(navigationUiOptions)
     }
 
-    private val navigationListener = object : NavigationFragment.NavigationListener {
-        override fun onStarted() {
-            mainViewModel.onNavigationStarted(resources.getDimension(R.dimen.map_padding_bottom).toInt())
-        }
-
-        override fun onStopped() {
-            mainViewModel.stopNavigation()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -119,6 +113,8 @@ class MainActivity : AppCompatActivity() {
         frameLayout.addView(setupMapContainer())
         frameLayout.addView(setupSearchView())
         frameLayout.addView(setupSimulationButton())
+        frameLayout.addView(setupThreadDebugCard())
+        frameLayout.addView(setupCoroutineDebugCard())
 
         requestLocationPermission()
         configureViewModel()
@@ -198,19 +194,78 @@ class MainActivity : AppCompatActivity() {
             rightMargin = dp2px(20)
             bottomMargin = dp2px(70)
         }
-        simulationButton.text = "Start Simulation"
+        simulationButton.text = "Start Navigation"
         simulationButton.setOnClickListener {
+            if (mainViewModel.navigationStarted.value) {
+                mainViewModel.stopNavigation()
+                return@setOnClickListener
+            }
             if (!isLocationPermissionGranted) {
                 Toast.makeText(this@MainActivity, "Please allow location permissions", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            simulationButton.visibility = ViewGroup.GONE
-            searchView.visibility = ViewGroup.GONE
             mainViewModel.startNavigation()
         }
         simulationButton.visibility = ViewGroup.GONE
         return simulationButton
     }
+
+    private fun setupThreadDebugCard(): View {
+        val card = ComposeView(this).apply {
+            setContent { ThreadDebugCard() }
+        }
+        card.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.BOTTOM or Gravity.START
+            leftMargin = dp2px(12)
+            bottomMargin = dp2px(70)
+        }
+        return card
+    }
+
+    private fun setupCoroutineDebugCard(): View {
+        val card = ComposeView(this).apply {
+            setContent { CoroutineDebugCard(rootScopesProvider = ::collectRootScopes) }
+        }
+        card.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.TOP or Gravity.END
+            rightMargin = dp2px(12)
+            topMargin = dp2px(110)
+        }
+        return card
+    }
+
+    private fun collectRootScopes(): List<Pair<String, CoroutineScope>> {
+        val scopes = mutableListOf<Pair<String, CoroutineScope>>()
+        scopes += "viewModel" to mainViewModel.viewModelScope
+        scopes += "lifecycle" to lifecycleScope
+        if (tomTomNavigationProvider.isInitialized()) {
+            sdkNavigationScope(tomTomNavigationProvider.value)?.let {
+                scopes += "TomTomNavigation (SDK)" to it
+            }
+        }
+        return scopes
+    }
+
+    private fun sdkNavigationScope(navigation: Any): CoroutineScope? = runCatching {
+        // DefaultTomTomNavigation has a CoroutineScope field, but the release
+        // AAR is R8-obfuscated (the source name `coroutineScope` becomes `b`),
+        // so we search by type instead of by name.
+        var clazz: Class<*>? = navigation.javaClass
+        while (clazz != null) {
+            clazz.declaredFields.firstOrNull { CoroutineScope::class.java.isAssignableFrom(it.type) }?.let { field ->
+                field.isAccessible = true
+                return@runCatching field.get(navigation) as? CoroutineScope
+            }
+            clazz = clazz.superclass
+        }
+        null
+    }.getOrNull()
 
     private fun setupNavigationUi() {
         supportFragmentManager.beginTransaction().apply {
@@ -251,7 +306,7 @@ class MainActivity : AppCompatActivity() {
     private fun configureViewModel() {
         lifecycleScope.launch {
             mainViewModel.selectedRoutePlan.collect {
-                simulationButton.visibility = if (it != null && !mainViewModel.navigationStarted.value) {
+                simulationButton.visibility = if (it != null || mainViewModel.navigationStarted.value) {
                     ViewGroup.VISIBLE
                 } else {
                     ViewGroup.GONE
@@ -283,19 +338,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureNavigationStart() {
         searchView.visibility = ViewGroup.GONE
-        simulationButton.visibility = ViewGroup.GONE
+        simulationButton.text = "Stop"
+        simulationButton.visibility = ViewGroup.VISIBLE
         mapFragment.currentLocationButton.visibilityPolicy = CurrentLocationButton.VisibilityPolicy.Invisible
         navigationFragment.setTomTomNavigation(tomTomNavigationProvider.value)
         navigationFragment.navigationView.showSpeedView()
         navigationFragment.navigationView.showGuidanceView()
-        navigationFragment.startNavigation(mainViewModel.selectedRoutePlan.value!!)
-        navigationFragment.addNavigationListener(navigationListener)
+        // The TomTomNavigation engine is already started by MainViewModel on the
+        // navigation dispatcher; we no longer call navigationFragment.startNavigation.
+        // Trigger map setup directly since NavigationListener.onStarted won't fire.
+        mainViewModel.onNavigationStarted(resources.getDimension(R.dimen.map_padding_bottom).toInt())
     }
 
     private fun configureNavigationStop() {
         searchView.visibility = ViewGroup.VISIBLE
+        simulationButton.text = "Start Navigation"
         mapFragment.currentLocationButton.visibilityPolicy = CurrentLocationButton.VisibilityPolicy.InvisibleWhenRecentered
-        navigationFragment.stopNavigation()
-        navigationFragment.removeNavigationListener(navigationListener)
+        navigationFragment.navigationView.hideSpeedView()
+        navigationFragment.navigationView.hideGuidanceView()
     }
 }
