@@ -207,6 +207,10 @@ class MainViewModel(
         _navigationStarted.value = true
         _destinationArrived.value = false
         _announcementMessage.value = ""
+        val activeTag = routePlan.route.id.toString()
+        onMap {
+            tomTomMap.routes.filter { it.tag != activeTag }.forEach { it.remove() }
+        }
         // tomTomNavigation already holds the TommyLocationProvider wrapper from
         // the factory Configuration; the wrapper currently delegates to
         // AndroidLocationProvider, so navigation receives real device GPS.

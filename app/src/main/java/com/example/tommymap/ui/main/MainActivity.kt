@@ -33,6 +33,7 @@ import com.example.tommymap.data.TommyRouteReplanningEngine
 import com.example.tommymap.data.XPHybridRouteReplanner
 import com.example.tommymap.dp2px
 import com.example.tommymap.isLocationPermissionGranted
+import com.example.tommymap.ui.debug.ReplanStatusCard
 import com.example.tommymap.ui.debug.ThreadDebugCard
 import com.example.tommymap.ui.search.SearchViewModel
 import com.example.tommymap.ui.search.TommySearchView
@@ -170,6 +171,7 @@ class MainActivity : AppCompatActivity() {
         frameLayout.addView(setupSimulationButton())
         frameLayout.addView(setupThreadDebugCard())
         frameLayout.addView(setupDebugToolsColumn())
+        frameLayout.addView(setupReplanStatusCard())
 
         requestLocationPermission()
         configureViewModel()
@@ -330,6 +332,22 @@ class MainActivity : AppCompatActivity() {
         column.addView(dumpButton)
 
         return column
+    }
+
+    private fun setupReplanStatusCard(): View {
+        val card = ComposeView(this).apply {
+            setContent {
+                ReplanStatusCard(statusFlow = routeReplanningEngineProvider.value.status)
+            }
+        }
+        card.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            topMargin = dp2px(110)
+        }
+        return card
     }
 
     private fun setupThreadDebugCard(): View {

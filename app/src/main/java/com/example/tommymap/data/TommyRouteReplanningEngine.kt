@@ -6,7 +6,16 @@ import com.tomtom.sdk.navigation.NavigationSnapshot
 import com.tomtom.sdk.navigation.replanning.ReplannedRoute
 import com.tomtom.sdk.navigation.replanning.RouteReplanningEngine
 import com.tomtom.sdk.navigation.replanning.RouteReplanningEngineFailure
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.runBlocking
+
+sealed interface ReplanStatus {
+    object Idle : ReplanStatus
+    object InProgress : ReplanStatus
+    data class Succeeded(val routeCount: Int, val tookMs: Long) : ReplanStatus
+    data class Failed(val message: String, val tookMs: Long) : ReplanStatus
+}
 
 /**
  * Decorates a [RouteReplanningEngine] so that:
@@ -20,6 +29,9 @@ import kotlinx.coroutines.runBlocking
 class TommyRouteReplanningEngine(
     private val delegate: RouteReplanningEngine,
 ) : RouteReplanningEngine {
+
+    private val _status = MutableStateFlow<ReplanStatus>(ReplanStatus.Idle)
+    val status: StateFlow<ReplanStatus> = _status
 
     override fun shouldReplan(navigationSnapshot: NavigationSnapshot): Boolean {
         val callerThread = Thread.currentThread().name
@@ -38,13 +50,16 @@ class TommyRouteReplanningEngine(
         navigationSnapshot: NavigationSnapshot,
     ): Result<List<ReplannedRoute>, RouteReplanningEngineFailure> {
         val callerThread = Thread.currentThread().name
+        _status.value = ReplanStatus.InProgress
+        val started = System.currentTimeMillis()
         return runBlocking(TommyDispatchers.routing) {
-            val started = System.currentTimeMillis()
             val result = delegate.replan(navigationSnapshot)
             val elapsedMs = System.currentTimeMillis() - started
             val outcome = if (result.isSuccess()) {
+                _status.value = ReplanStatus.Succeeded(result.value().size, elapsedMs)
                 "${result.value().size} route(s)"
             } else {
+                _status.value = ReplanStatus.Failed(result.failure().toString(), elapsedMs)
                 "failure ${result.failure()}"
             }
             Log.d(
