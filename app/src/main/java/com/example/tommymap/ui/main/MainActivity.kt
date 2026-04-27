@@ -251,8 +251,10 @@ class MainActivity : AppCompatActivity() {
     private fun configureViewModel() {
         lifecycleScope.launch {
             mainViewModel.selectedRoutePlan.collect {
-                if (it != null) {
-                    simulationButton.visibility = ViewGroup.VISIBLE
+                simulationButton.visibility = if (it != null && !mainViewModel.navigationStarted.value) {
+                    ViewGroup.VISIBLE
+                } else {
+                    ViewGroup.GONE
                 }
             }
         }

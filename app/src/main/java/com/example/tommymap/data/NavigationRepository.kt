@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.flowOn
 interface NavigationRepository {
     val destination: StateFlow<GeoPoint?>
     fun selectDestination(coordinate: GeoPoint)
+    fun clearDestination()
     fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<List<RoutePlan>>
 }
 
@@ -34,6 +35,10 @@ class NavigationRepositoryImpl(
 
     override fun selectDestination(coordinate: GeoPoint) {
         _destination.value = coordinate
+    }
+
+    override fun clearDestination() {
+        _destination.value = null
     }
 
     override fun planRoute(origin: GeoPoint, destination: GeoPoint) = flow {

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.tommymap"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -84,7 +84,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    val tom2Version = "0.48.0"
+    val tom2Version = "1.25.20"
     implementation("com.tomtom.sdk.maps:map-display:$tom2Version")
     implementation("com.tomtom.sdk.location:provider-android:$tom2Version")
     implementation("com.tomtom.sdk.location:provider-simulation:$tom2Version")

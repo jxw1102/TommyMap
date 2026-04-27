@@ -152,6 +152,10 @@ class DummyNavRepo(override val destination: StateFlow<GeoPoint?>) : NavigationR
         println("location selected: $coordinate")
     }
 
+    override fun clearDestination() {
+        println("destination cleared")
+    }
+
     override fun planRoute(origin: GeoPoint, destination: GeoPoint): Flow<List<RoutePlan>> {
         TODO("Not yet implemented")
     }
@@ -168,6 +172,10 @@ fun TommySearchViewPreview() {
 
         override fun selectDestination(coordinate: GeoPoint) {
             println("location selected: $coordinate")
+        }
+
+        override fun clearDestination() {
+            println("destination cleared")
         }
 
         override fun planRoute(

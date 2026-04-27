@@ -10,6 +10,7 @@ import com.example.tommymap.data.TommyLocationProvider
 import com.tomtom.quantity.Distance
 import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
+import com.tomtom.sdk.location.LocationProvider
 import com.tomtom.sdk.location.OnLocationUpdateListener
 import com.tomtom.sdk.map.display.TomTomMap
 import com.tomtom.sdk.map.display.camera.CameraOptions
@@ -64,6 +65,8 @@ class MainViewModel(
     private var routePlans: MutableList<RoutePlan> = mutableListOf()
     private val _selectedRoutePlan = MutableStateFlow<RoutePlan?>(null)
     val selectedRoutePlan: StateFlow<RoutePlan?> = _selectedRoutePlan
+
+    private var simulationLocationProvider: LocationProvider? = null
 
     private val origin: GeoPoint?
         get() = locationProvider.lastKnownLocation?.position
@@ -160,7 +163,9 @@ class MainViewModel(
     fun startNavigation() {
         _navigationStarted.value = true
         _destinationArrived.value = false
-        tomTomNavigation.locationProvider = TommyLocationProvider.createSimulationLocationProvider(selectedRoutePlan.value!!.route)
+        _announcementMessage.value = ""
+        simulationLocationProvider = TommyLocationProvider.createSimulationLocationProvider(selectedRoutePlan.value!!.route)
+        tomTomNavigation.locationProvider = simulationLocationProvider!!
         tomTomNavigation.addProgressUpdatedListener(progressUpdatedListener)
         tomTomNavigation.addRouteAddedListener(routeAddedListener)
         tomTomNavigation.addRouteRemovedListener(routeRemovedListener)
@@ -177,6 +182,9 @@ class MainViewModel(
     }
 
     fun stopNavigation() {
+        tomTomNavigation.stop()
+        simulationLocationProvider?.close()
+        simulationLocationProvider = null
         tomTomNavigation.removeProgressUpdatedListener(progressUpdatedListener)
         tomTomNavigation.removeRouteAddedListener(routeAddedListener)
         tomTomNavigation.removeRouteRemovedListener(routeRemovedListener)
@@ -184,11 +192,16 @@ class MainViewModel(
         tomTomNavigation.removeDestinationArrivalListener(destinationArrivalListener)
         tomTomNavigation.removeGuidanceUpdatedListener(guidanceUpdatedListener)
         _navigationStarted.value = false
+        _destinationArrived.value = false
+        _announcementMessage.value = ""
         locationProvider.useAndroidLocationProvider()
         tomTomMap.cameraTrackingMode = CameraTrackingMode.None
         tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))
         tomTomMap.setPadding(Padding(0, 0, 0, 0))
         clearMap()
+        routePlans.clear()
+        _selectedRoutePlan.value = null
+        navigationRepository.clearDestination()
     }
 
     private fun listenToCurrentPosition() {
