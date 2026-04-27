@@ -93,5 +93,6 @@ dependencies {
     implementation("com.tomtom.sdk.routing:route-planner-online:$tom2Version")
     implementation("com.tomtom.sdk.navigation:navigation-online:$tom2Version")
     implementation("com.tomtom.sdk.navigation:route-replanner-online:$tom2Version")
+    implementation("com.tomtom.sdk.navigation:route-replanner-hybrid:$tom2Version")
     implementation("com.tomtom.sdk.navigation:ui:$tom2Version")
 }

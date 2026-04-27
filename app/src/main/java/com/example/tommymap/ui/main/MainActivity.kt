@@ -29,22 +29,27 @@ import com.example.tommymap.data.NavigationRepository
 import com.example.tommymap.data.NavigationRepositoryImpl
 import com.example.tommymap.data.SearchRepositoryImpl
 import com.example.tommymap.data.TommyLocationProvider
+import com.example.tommymap.data.TommyRouteReplanningEngine
+import com.example.tommymap.data.XPHybridRouteReplanner
 import com.example.tommymap.dp2px
 import com.example.tommymap.isLocationPermissionGranted
-import androidx.lifecycle.viewModelScope
-import com.example.tommymap.ui.debug.CoroutineDebugCard
 import com.example.tommymap.ui.debug.ThreadDebugCard
-import kotlinx.coroutines.CoroutineScope
 import com.example.tommymap.ui.search.SearchViewModel
 import com.example.tommymap.ui.search.TommySearchView
+import com.tomtom.quantity.Distance
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStore
 import com.tomtom.sdk.datamanagement.navigationtile.NavigationTileStoreConfiguration
+import com.tomtom.sdk.location.LocationProvider
+import com.tomtom.sdk.location.android.AndroidLocationProvider
+import com.tomtom.sdk.location.android.AndroidLocationProviderConfig
 import com.tomtom.sdk.map.display.MapOptions
 import com.tomtom.sdk.map.display.ui.MapFragment
 import com.tomtom.sdk.map.display.ui.currentlocation.CurrentLocationButton
 import com.tomtom.sdk.navigation.UnitSystemType
 import com.tomtom.sdk.navigation.online.Configuration
 import com.tomtom.sdk.navigation.online.OnlineTomTomNavigationFactory
+import com.tomtom.sdk.navigation.replanning.RouteReplanningEngineFactory
+import com.tomtom.sdk.navigation.routereplanner.hybrid.HybridRouteReplannerFactory
 import com.tomtom.sdk.navigation.ui.NavigationFragment
 import com.tomtom.sdk.navigation.ui.NavigationUiOptions
 import com.tomtom.sdk.routing.RoutePlanner
@@ -54,6 +59,7 @@ import com.tomtom.sdk.search.online.OnlineSearch
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import java.util.Locale
+import kotlin.time.Duration.Companion.milliseconds
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,8 +77,57 @@ class MainActivity : AppCompatActivity() {
     private val tileStore: NavigationTileStore by lazy {
         NavigationTileStore.create(this, NavigationTileStoreConfiguration(BuildConfig.TOMTOM_API_KEY))
     }
+    // HybridRouteReplanner exercises the runBlocking(Dispatchers.IO.limitedParallelism(1))
+    // codepath inside RouteReplannerService.fullReplan that XPENG-1106 hangs in.
+    // We pass the OnlineRoutePlanner for both slots since we have no offline NDS
+    // store; the SDK races them and either wins is fine for reproduction.
+    // Mirrors XPENG's wrapper verbatim so our repro is byte-equivalent to their
+    // production call chain. fullReplan/update/incrementRouteContents are all
+    // pure passthroughs to HybridRouteReplannerFactory; only backToRoute is
+    // customized (removes depart instructions). The customer's source is in
+    // XPHybridRouteReplanner.kt.
+    private val routeReplannerProvider = lazy {
+        XPHybridRouteReplanner(
+            onlineRoutePlanner = routePlanner,
+            offlineRoutePlanner = routePlanner,
+            replannerListener = { result ->
+                android.util.Log.i(
+                    "TommyMain",
+                    "[${Thread.currentThread().name}] XPHybridRouteReplanner.listener -> " +
+                        if (result.isSuccess()) "success ${result.value().routes.size} route(s)"
+                        else "failure ${result.failure()}"
+                )
+            }
+        )
+    }
+    private val routeReplanningEngineProvider = lazy {
+        TommyRouteReplanningEngine(
+            RouteReplanningEngineFactory.create(routeReplannerProvider.value)
+        )
+    }
+
+    // Dedicated AndroidLocationProvider for the navigation engine. We keep this
+    // separate from `locationProvider` (the map's wrapper) so the wrapper can
+    // switch its inner delegate to MapMatchedLocationProvider during navigation
+    // without creating a circular dependency on the engine.
+    private val navLocationProviderLazy = lazy {
+        AndroidLocationProvider(
+            this,
+            AndroidLocationProviderConfig(250.milliseconds, Distance.meters(20.0))
+        ).also { if (isLocationPermissionGranted) it.enable() }
+    }
+    private val navLocationProvider: LocationProvider get() = navLocationProviderLazy.value
+
     private val tomTomNavigationProvider = lazy {
-        OnlineTomTomNavigationFactory.create(Configuration(this, tileStore, locationProvider, routePlanner))
+        OnlineTomTomNavigationFactory.create(
+            Configuration(
+                context = this,
+                navigationTileStore = tileStore,
+                locationProvider = navLocationProvider,
+                routePlanner = routePlanner,
+                routeReplanningEngine = routeReplanningEngineProvider.value,
+            )
+        )
     }
     private val navigationRepository: NavigationRepository by lazy {
         NavigationRepositoryImpl(routePlanner)
@@ -114,7 +169,7 @@ class MainActivity : AppCompatActivity() {
         frameLayout.addView(setupSearchView())
         frameLayout.addView(setupSimulationButton())
         frameLayout.addView(setupThreadDebugCard())
-        frameLayout.addView(setupCoroutineDebugCard())
+        frameLayout.addView(setupDebugToolsColumn())
 
         requestLocationPermission()
         configureViewModel()
@@ -127,6 +182,12 @@ class MainActivity : AppCompatActivity() {
         tileStore.close()
         if (tomTomNavigationProvider.isInitialized()) {
             tomTomNavigationProvider.value.close()
+        }
+        if (routeReplanningEngineProvider.isInitialized()) {
+            routeReplanningEngineProvider.value.close()
+        }
+        if (navLocationProviderLazy.isInitialized()) {
+            navLocationProviderLazy.value.close()
         }
         super.onDestroy()
     }
@@ -210,12 +271,73 @@ class MainActivity : AppCompatActivity() {
         return simulationButton
     }
 
+    private val ioStressJobs = mutableListOf<kotlinx.coroutines.Job>()
+    private var ioStressLatch: java.util.concurrent.CountDownLatch? = null
+
+    private fun setupDebugToolsColumn(): View {
+        val column = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.TOP or Gravity.END
+                rightMargin = dp2px(12)
+                topMargin = dp2px(110)
+            }
+        }
+
+        val stressButton = Button(this).apply { text = "Stress IO" }
+        stressButton.setOnClickListener {
+            if (ioStressLatch == null) {
+                // Park 64 IO workers on a single CountDownLatch.await(), which
+                // blocks the underlying thread via LockSupport.park. The IO pool
+                // can no longer hand out workers, so any subsequent
+                // runBlocking(IO.limitedParallelism(1)) — e.g. inside the SDK's
+                // RouteReplannerService.fullReplan — has to wait.
+                val latch = java.util.concurrent.CountDownLatch(1)
+                ioStressLatch = latch
+                repeat(64) {
+                    ioStressJobs += lifecycleScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+                        kotlinx.coroutines.runInterruptible { latch.await() }
+                    }
+                }
+                stressButton.text = "Unstress IO"
+                Toast.makeText(this@MainActivity, "Parked 64 IO workers on CountDownLatch", Toast.LENGTH_SHORT).show()
+            } else {
+                ioStressLatch?.countDown()
+                ioStressLatch = null
+                ioStressJobs.clear()
+                stressButton.text = "Stress IO"
+                Toast.makeText(this@MainActivity, "Released IO pool", Toast.LENGTH_SHORT).show()
+            }
+        }
+        column.addView(stressButton)
+
+        val dumpButton = Button(this).apply { text = "Dump threads" }
+        dumpButton.setOnClickListener {
+            val sb = StringBuilder("=== THREAD DUMP @ ${System.currentTimeMillis()} ===\n")
+            Thread.getAllStackTraces().toSortedMap(compareBy { it.name }).forEach { (thread, stack) ->
+                sb.append("\n--- ${thread.name} (tid=${thread.id} state=${thread.state}) ---\n")
+                stack.take(40).forEach { sb.append("  at $it\n") }
+            }
+            // Logcat caps single messages at ~4KB; chunk it.
+            sb.toString().chunked(3500).forEachIndexed { i, chunk ->
+                android.util.Log.w("TommyDump", "[part $i] $chunk")
+            }
+            Toast.makeText(this@MainActivity, "Dumped ${Thread.activeCount()} threads to logcat (TommyDump)", Toast.LENGTH_SHORT).show()
+        }
+        column.addView(dumpButton)
+
+        return column
+    }
+
     private fun setupThreadDebugCard(): View {
         val card = ComposeView(this).apply {
             setContent { ThreadDebugCard() }
         }
         card.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
+            dp2px(380),
             FrameLayout.LayoutParams.WRAP_CONTENT
         ).apply {
             gravity = Gravity.BOTTOM or Gravity.START
@@ -225,47 +347,6 @@ class MainActivity : AppCompatActivity() {
         return card
     }
 
-    private fun setupCoroutineDebugCard(): View {
-        val card = ComposeView(this).apply {
-            setContent { CoroutineDebugCard(rootScopesProvider = ::collectRootScopes) }
-        }
-        card.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            gravity = Gravity.TOP or Gravity.END
-            rightMargin = dp2px(12)
-            topMargin = dp2px(110)
-        }
-        return card
-    }
-
-    private fun collectRootScopes(): List<Pair<String, CoroutineScope>> {
-        val scopes = mutableListOf<Pair<String, CoroutineScope>>()
-        scopes += "viewModel" to mainViewModel.viewModelScope
-        scopes += "lifecycle" to lifecycleScope
-        if (tomTomNavigationProvider.isInitialized()) {
-            sdkNavigationScope(tomTomNavigationProvider.value)?.let {
-                scopes += "TomTomNavigation (SDK)" to it
-            }
-        }
-        return scopes
-    }
-
-    private fun sdkNavigationScope(navigation: Any): CoroutineScope? = runCatching {
-        // DefaultTomTomNavigation has a CoroutineScope field, but the release
-        // AAR is R8-obfuscated (the source name `coroutineScope` becomes `b`),
-        // so we search by type instead of by name.
-        var clazz: Class<*>? = navigation.javaClass
-        while (clazz != null) {
-            clazz.declaredFields.firstOrNull { CoroutineScope::class.java.isAssignableFrom(it.type) }?.let { field ->
-                field.isAccessible = true
-                return@runCatching field.get(navigation) as? CoroutineScope
-            }
-            clazz = clazz.superclass
-        }
-        null
-    }.getOrNull()
 
     private fun setupNavigationUi() {
         supportFragmentManager.beginTransaction().apply {

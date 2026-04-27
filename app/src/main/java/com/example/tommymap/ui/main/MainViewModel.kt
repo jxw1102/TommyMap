@@ -31,6 +31,7 @@ import com.tomtom.sdk.navigation.RouteAddedListener
 import com.tomtom.sdk.navigation.RouteAddedReason
 import com.tomtom.sdk.navigation.RoutePlan
 import com.tomtom.sdk.navigation.RouteRemovedListener
+import com.tomtom.sdk.navigation.RouteTrackingStateUpdatedListener
 import com.tomtom.sdk.navigation.TomTomNavigation
 import com.tomtom.sdk.navigation.guidance.GuidanceAnnouncement
 import com.tomtom.sdk.navigation.guidance.InstructionPhase
@@ -131,6 +132,18 @@ class MainViewModel(
         }
     }
 
+    private val routeTrackingStateUpdatedListener = RouteTrackingStateUpdatedListener { state ->
+        onNavigationThread {
+            Log.d(
+                "TommyMain",
+                "[${currentThreadName()}] RouteTrackingStateUpdatedListener " +
+                    "hasDeviated=${state.hasDeviated} " +
+                    "followed=${state.followedRoutes.size} " +
+                    "unfollowed=${state.unfollowedRoutes.size}"
+            )
+        }
+    }
+
     private val routeClickListener = RouteClickListener { route ->
         if (tomTomMap.cameraTrackingMode == CameraTrackingMode.FollowRouteDirection) return@RouteClickListener
         _selectedRoutePlan.value = routePlans.first { it.route.id.toString() == route.tag }
@@ -204,6 +217,7 @@ class MainViewModel(
             tomTomNavigation.addActiveRouteChangedListener(activeRouteChangedListener)
             tomTomNavigation.addDestinationArrivalListener(destinationArrivalListener)
             tomTomNavigation.addGuidanceUpdatedListener(guidanceUpdatedListener)
+            tomTomNavigation.addRouteTrackingStateUpdatedListener(routeTrackingStateUpdatedListener)
             tomTomNavigation.start(NavigationOptions(routePlan))
         }
     }
@@ -214,6 +228,10 @@ class MainViewModel(
             tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Chevron))
             tomTomMap.setPadding(Padding(0, 0, 0, bottomPadding))
         }
+        // The navigation engine has its own AndroidLocationProvider (configured
+        // in MainActivity), so we're free to switch the map's wrapper to a
+        // MapMatched provider here — the marker now snaps to the route.
+        locationProvider.useMapMatchedLocationProvider(tomTomNavigation)
     }
 
     fun stopNavigation() {
@@ -225,10 +243,14 @@ class MainViewModel(
             tomTomNavigation.removeActiveRouteChangedListener(activeRouteChangedListener)
             tomTomNavigation.removeDestinationArrivalListener(destinationArrivalListener)
             tomTomNavigation.removeGuidanceUpdatedListener(guidanceUpdatedListener)
+            tomTomNavigation.removeRouteTrackingStateUpdatedListener(routeTrackingStateUpdatedListener)
         }
         _navigationStarted.value = false
         _destinationArrived.value = false
         _announcementMessage.value = ""
+        // Restore the map's wrapper to raw Android GPS so the marker keeps
+        // moving after we tear down the MapMatched delegate.
+        locationProvider.useAndroidLocationProvider()
         onMap {
             tomTomMap.cameraTrackingMode = CameraTrackingMode.None
             tomTomMap.enableLocationMarker(LocationMarkerOptions(LocationMarkerOptions.Type.Pointer))

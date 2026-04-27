@@ -41,9 +41,23 @@ fun ThreadDebugCard(modifier: Modifier = Modifier) {
 
     LaunchedEffect(Unit) {
         while (true) {
-            rows = Thread.getAllStackTraces().keys
-                .mapNotNull { it.toRowOrNull() }
-                .sortedWith(compareBy({ it.role.order }, { it.name }))
+            val all = Thread.getAllStackTraces().keys.mapNotNull { it.toRowOrNull() }
+            // Collapse the DefaultDispatcher-worker-* horde into one summary row;
+            // there can be 64+ of them and they're all interchangeable kotlinx-coroutines IO workers.
+            val (workers, rest) = all.partition { it.name.startsWith("DefaultDispatcher-worker-") }
+            val collapsed = if (workers.isEmpty()) emptyList() else {
+                val byState = workers.groupingBy { it.state }.eachCount()
+                val stateSummary = byState.entries.joinToString(" / ") { "${it.value} ${it.key}" }
+                listOf(
+                    ThreadRow(
+                        name = "DefaultDispatcher-worker × ${workers.size}",
+                        state = stateSummary,
+                        tid = workers.first().tid,
+                        role = Role.SDK_BG,
+                    )
+                )
+            }
+            rows = (rest + collapsed).sortedWith(compareBy({ it.role.order }, { it.name }))
             delay(1000)
         }
     }
@@ -69,28 +83,36 @@ fun ThreadDebugCard(modifier: Modifier = Modifier) {
                     color = row.role.color,
                     fontSize = 10.sp,
                     fontFamily = FontFamily.Monospace,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    softWrap = false,
+                    maxLines = 1
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
                     text = row.name,
                     color = Color.White,
                     fontSize = 10.sp,
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    softWrap = false,
+                    maxLines = 1
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
                     text = row.state,
                     color = stateColor(row.state),
                     fontSize = 10.sp,
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    softWrap = false,
+                    maxLines = 1
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
                     text = "#${row.tid}",
                     color = Color(0xFF9E9E9E),
                     fontSize = 10.sp,
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    softWrap = false,
+                    maxLines = 1
                 )
             }
         }
